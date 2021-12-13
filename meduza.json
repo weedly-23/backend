@@ -1,0 +1,512 @@
+{
+    "norm authors": [
+        {
+            "title": "\u0422\u043e\u0440\u043d\u0430\u0434\u043e \u0443\u043d\u0435\u0441 \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044e \u0438\u0437\u00a0\u0440\u0430\u0437\u0440\u0443\u0448\u0435\u043d\u043d\u043e\u0433\u043e \u0434\u043e\u043c\u0430 \u0432\u00a0\u041a\u0435\u043d\u0442\u0443\u043a\u043a\u0438 \u043d\u0430\u00a0200 \u043a\u0438\u043b\u043e\u043c\u0435\u0442\u0440\u043e\u0432 \u0432\u00a0\u0448\u0442\u0430\u0442 \u0418\u043d\u0434\u0438\u0430\u043d\u0430. \u0411\u043b\u0430\u0433\u043e\u0434\u0430\u0440\u044f \u0441\u043e\u0446\u0441\u0435\u0442\u044f\u043c \u0432\u043b\u0430\u0434\u0435\u043b\u044c\u0446\u0430 \u0441\u043d\u0438\u043c\u043a\u0430 \u043d\u0430\u0448\u043b\u0438 \u0437\u0430\u00a0\u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u0447\u0430\u0441\u043e\u0432",
+            "author": "\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440 \u0411\u0430\u043a\u043b\u0430\u043d\u043e\u0432",
+            "link": "https://meduza.io/feature/2021/12/13/tornado-unes-fotografiyu-iz-razrushennogo-doma-v-kentukki-na-200-kilometrov-v-shtat-indiana-blagodarya-sotssetyam-vladeltsa-snimka-nashli-za-neskolko-chasov",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 14:27:20 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                11,
+                27,
+                20,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u041a\u0440\u0443\u043f\u043d\u0435\u0439\u0448\u0438\u0439 \u0440\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u0438\u0439 \u0430\u0432\u0442\u043e\u0434\u0438\u043b\u0435\u0440 \u00ab\u0420\u043e\u043b\u044c\u0444\u00bb \u0431\u0443\u0434\u0435\u0442 \u043f\u0440\u043e\u0434\u0430\u043d. \u041d\u0430\u00a0\u0435\u0433\u043e \u043e\u0441\u043d\u043e\u0432\u0430\u0442\u0435\u043b\u044f \u0421\u0435\u0440\u0433\u0435\u044f \u041f\u0435\u0442\u0440\u043e\u0432\u0430 \u0434\u0432\u0430 \u0433\u043e\u0434\u0430 \u043d\u0430\u0437\u0430\u0434 \u0437\u0430\u0432\u0435\u043b\u0438 \u0443\u0433\u043e\u043b\u043e\u0432\u043d\u043e\u0435 \u0434\u0435\u043b\u043e",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/krupneyshiy-rossiyskiy-avtodiler-rolf-budet-prodan-na-ego-osnovatelya-sergeya-petrova-dva-goda-nazad-zaveli-ugolovnoe-delo",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 14:26:31 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                11,
+                26,
+                31,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u00ab\u041d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0441\u0432\u044f\u0437\u0430\u0442\u044c\u0441\u044f \u0441\u00a0\u0414\u0435\u0434\u043e\u043c \u041c\u043e\u0440\u043e\u0437\u043e\u043c, \u043f\u043e\u00a0\u0441\u043e\u0432\u043c\u0435\u0441\u0442\u0438\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0443 \u2014\u00a0\u0437\u0430\u043c\u0435\u0441\u0442\u0438\u0442\u0435\u043b\u0435\u043c \u043a\u043e\u043c\u0430\u043d\u0434\u0443\u044e\u0449\u0435\u0433\u043e \u0430\u0440\u043c\u0438\u0435\u0439\u00bb. \u041c\u0430\u043b\u044c\u0447\u0438\u043a \u0438\u0437\u00a0\u0420\u043e\u0441\u0441\u043e\u0448\u0438 \u043f\u043e\u043f\u0440\u043e\u0441\u0438\u043b \u043d\u0430\u00a0\u041d\u043e\u0432\u044b\u0439 \u0433\u043e\u0434 \u043f\u043e\u0435\u0437\u0434\u043a\u0443 \u043d\u0430\u00a0\u0442\u0430\u043d\u043a\u0435. \u0412\u043e\u0442 \u0447\u0442\u043e \u0435\u043c\u0443 (\u044f\u043a\u043e\u0431\u044b) \u043e\u0442\u0432\u0435\u0442\u0438\u043b\u0438 \u0432\u00a0\u041c\u0438\u043d\u043e\u0431\u043e\u0440\u043e\u043d\u044b",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/shapito/2021/12/13/neobhodimo-svyazatsya-s-dedom-morozom-po-sovmestitelstvu-zamestitelem-komanduyuschego-armiey",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 14:12:20 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                11,
+                12,
+                20,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u0412\u00a0\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u0438 \u0432\u043f\u0435\u0440\u0432\u044b\u0435 \u0437\u0430\u00a025 \u043b\u0435\u0442 \u0441\u043c\u0435\u043d\u0438\u043b\u0441\u044f \u0433\u043b\u0430\u0432\u0430 \u0426\u0418\u041a",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/v-belarusi-vpervye-za-25-let-smenilsya-glava-tsik",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 13:21:58 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                10,
+                21,
+                58,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u041f\u043e\u043b\u0438\u0442\u0438\u043a, \u043b\u0438\u0434\u0435\u0440 \u0438\u00a0\u0442\u0430\u043a\u0441\u0438\u0441\u0442: \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u041f\u0443\u0442\u0438\u043d \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0430\u043b, \u0447\u0442\u043e \u0432\u00a01990-\u0435 \u0437\u0430\u043d\u0438\u043c\u0430\u043b\u0441\u044f \u0447\u0430\u0441\u0442\u043d\u044b\u043c \u0438\u0437\u0432\u043e\u0437\u043e\u043c. \u0412\u00a0\u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430\u0445 \u0421\u041c\u0418 \u044d\u0442\u0430 \u043d\u043e\u0432\u043e\u0441\u0442\u044c \u0432\u044b\u0433\u043b\u044f\u0434\u0438\u0442 \u043f\u0440\u043e\u0441\u0442\u043e \u0432\u0435\u043b\u0438\u043a\u043e\u043b\u0435\u043f\u043d\u043e",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/shapito/2021/12/13/politik-lider-i-taksist-vladimir-putin-rasskazal-chto-v-1990-e-zanimalsya-chastnym-izvozom-v-zagolovkah-smi-eta-novost-vyglyadit-prosto-velikolepno",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 13:10:03 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                10,
+                10,
+                3,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u043e\u043d\u043d\u044b\u0439 \u0441\u0443\u0434 \u043e\u0442\u043a\u043b\u043e\u043d\u0438\u043b \u0436\u0430\u043b\u043e\u0431\u044b \u043f\u0440\u0430\u0432\u043e\u0437\u0430\u0449\u0438\u0442\u043d\u0438\u043a\u043e\u0432 \u043d\u0430\u00a0\u0437\u0430\u043f\u0440\u0435\u0442 \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u0441\u00a0\u0437\u0430\u043a\u043b\u044e\u0447\u0435\u043d\u043d\u044b\u043c\u0438 \u0421\u0418\u0417\u041e \u043e\u00a0\u043f\u044b\u0442\u043a\u0430\u0445, \u043a\u043e\u0442\u043e\u0440\u044b\u043c \u043e\u043d\u0438 \u043f\u043e\u0434\u0432\u0435\u0440\u0433\u043b\u0438\u0441\u044c \u0437\u0430\u00a0\u043f\u0440\u0435\u0434\u0435\u043b\u0430\u043c\u0438 \u0438\u0437\u043e\u043b\u044f\u0442\u043e\u0440\u0430",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/konstitutsionnyy-sud-otklonil-zhaloby-pravozaschitnikov-na-zapret-govorit-s-zaklyuchennymi-sizo-o-pytkah-kotorym-oni-podverglis-za-predelami-izolyatora",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 13:04:15 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                10,
+                4,
+                15,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u0421\u044b\u043d \u0421\u0435\u0440\u0433\u0435\u044f \u041a\u0438\u0440\u0438\u0435\u043d\u043a\u043e \u043d\u0430\u0437\u043d\u0430\u0447\u0435\u043d \u0433\u0435\u043d\u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u043e\u043c VK",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/syn-sergeya-kirienko-naznachen-gendirektorom-vk",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 12:06:36 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                9,
+                6,
+                36,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u0424\u0421\u0411 \u0441\u043e\u043e\u0431\u0449\u0438\u043b\u0430 \u043e\u00a0\u0437\u0430\u0434\u0435\u0440\u0436\u0430\u043d\u0438\u0438 106 \u0441\u0442\u043e\u0440\u043e\u043d\u043d\u0438\u043a\u043e\u0432 \u043d\u0435\u043e\u043d\u0430\u0446\u0438\u0441\u0442\u0441\u043a\u043e\u0439 \u0433\u0440\u0443\u043f\u043f\u0438\u0440\u043e\u0432\u043a\u0438 \u00ab\u041c.\u041a.\u0423.\u00bb, \u044f\u043a\u043e\u0431\u044b \u0441\u043e\u0437\u0434\u0430\u043d\u043d\u043e\u0439 \u043f\u043e\u0434 \u0440\u0443\u043a\u043e\u0432\u043e\u0434\u0441\u0442\u0432\u043e\u043c \u0443\u043a\u0440\u0430\u0438\u043d\u0441\u043a\u0438\u0445 \u0441\u043f\u0435\u0446\u0441\u043b\u0443\u0436\u0431",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/fsb-soobschila-o-zaderzhanii-106-storonnikov-neonatsistskoy-gruppirovki-m-k-u-yakoby-sozdannoy-pod-rukovodstvom-ukrainskih-spetssluzhb",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 11:56:55 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                8,
+                56,
+                55,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u0420\u043e\u0441\u0441\u0438\u044f\u043d\u0435, \u043f\u0440\u0438\u0432\u0438\u0442\u044b\u0435 \u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u043d\u044b\u043c\u0438 \u0432\u0430\u043a\u0446\u0438\u043d\u0430\u043c\u0438 \u043e\u0442\u00a0\u043a\u043e\u0432\u0438\u0434\u0430, \u043f\u043e\u043b\u0443\u0447\u0430\u0442 QR-\u043a\u043e\u0434 \u043d\u0430\u00a0\u043f\u043e\u043b\u0433\u043e\u0434\u0430",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/rossiyane-privitye-inostrannymi-vaktsinami-ot-kovida-poluchat-qr-kod-na-polgoda",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 11:02:45 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                8,
+                2,
+                45,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u041e\u043c\u0438\u043a\u0440\u043e\u043d \u043e\u0431\u043d\u0430\u0440\u0443\u0436\u0438\u043b\u0438 \u0443\u00a016 \u0440\u043e\u0441\u0441\u0438\u044f\u043d",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/omikron-obnaruzhili-u-16-rossiyan",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 10:22:46 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                7,
+                22,
+                46,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u0412\u00a0\u041a\u0443\u0440\u0441\u043a\u043e\u0439 \u043e\u0431\u043b\u0430\u0441\u0442\u0438 \u043f\u043e\u0441\u0435\u0442\u0438\u0442\u0435\u043b\u044c \u043d\u043e\u0447\u043d\u043e\u0433\u043e \u043a\u043b\u0443\u0431\u0430 \u0443\u0441\u0442\u0440\u043e\u0438\u043b \u0441\u0442\u0440\u0435\u043b\u044c\u0431\u0443. \u0420\u0430\u043d\u0435\u043d\u044b \u043f\u044f\u0442\u044c \u0447\u0435\u043b\u043e\u0432\u0435\u043a",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/v-kurskoy-oblasti-posetitel-nochnogo-kluba-ustroil-strelbu-raneny-pyat-chelovek",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 10:20:35 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                7,
+                20,
+                35,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u0412\u00a0\u0421\u0435\u0440\u043f\u0443\u0445\u043e\u0432\u0435 \u043f\u043e\u0434\u0440\u043e\u0441\u0442\u043e\u043a \u0432\u0437\u043e\u0440\u0432\u0430\u043b \u0431\u043e\u043c\u0431\u0443 \u043d\u0430\u00a0\u0442\u0435\u0440\u0440\u0438\u0442\u043e\u0440\u0438\u0438 \u043c\u043e\u043d\u0430\u0441\u0442\u044b\u0440\u044f. \u041e\u043d\u00a0\u0443\u0447\u0438\u043b\u0441\u044f \u0432\u00a0\u0446\u0435\u0440\u043a\u043e\u0432\u043d\u043e-\u043f\u0440\u0438\u0445\u043e\u0434\u0441\u043a\u043e\u0439 \u0448\u043a\u043e\u043b\u0435 \u0438\u00a0\u0436\u0430\u043b\u043e\u0432\u0430\u043b\u0441\u044f \u043d\u0430\u00a0\u0431\u0443\u043b\u043b\u0438\u043d\u0433",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/feature/2021/12/13/v-serpuhove-podrostok-vzorval-bombu-na-territorii-monastyrya-on-uchilsya-v-tserkovno-prihodskoy-shkole-i-zhalovalsya-na-bulling",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 10:04:37 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                7,
+                4,
+                37,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u041c\u0438\u0437\u0443\u043b\u0438\u043d\u0430 \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0430\u043b\u0430 \u043e\u0431\u00a0\u00ab\u0438\u043d\u043e\u0441\u0442\u0440\u0430\u043d\u043d\u043e\u043c \u0444\u0438\u043d\u0430\u043d\u0441\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0438\u00bb \u041c\u043e\u0440\u0433\u0435\u043d\u0448\u0442\u0435\u0440\u043d\u0430. \u0420\u044d\u043f\u0435\u0440 \u0432\u00a0\u043e\u0442\u0432\u0435\u0442 \u043f\u043e\u043f\u0440\u043e\u0441\u0438\u043b \u043f\u0435\u0440\u0435\u0441\u0442\u0430\u0442\u044c \u043d\u0430\u00a0\u043d\u0435\u043c \u043f\u0438\u0430\u0440\u0438\u0442\u044c\u0441\u044f",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/mizulina-rasskazala-ob-inostrannom-finansirovanii-morgenshterna-reper-v-otvet-poprosil-perestat-na-nem-piaritsya",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 09:46:38 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                6,
+                46,
+                38,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u0412\u00a0\u0421\u0435\u0440\u043f\u0443\u0445\u043e\u0432\u0435 \u043d\u0430\u00a0\u0442\u0435\u0440\u0440\u0438\u0442\u043e\u0440\u0438\u0438 \u0436\u0435\u043d\u0441\u043a\u043e\u0433\u043e \u043c\u043e\u043d\u0430\u0441\u0442\u044b\u0440\u044f \u0441\u0440\u0430\u0431\u043e\u0442\u0430\u043b\u043e \u0432\u0437\u0440\u044b\u0432\u043d\u043e\u0435 \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u043e. \u041f\u043e\u0441\u0442\u0440\u0430\u0434\u0430\u043b\u0438 \u0434\u0432\u0430 \u0447\u0435\u043b\u043e\u0432\u0435\u043a\u0430",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/v-serpuhove-na-territorii-zhenskogo-monastyrya-srabotalo-vzryvnoe-ustroystvo-postradali-dva-cheloveka",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 09:28:30 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                6,
+                28,
+                30,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u0413\u043e\u0441\u0434\u0443\u043c\u0430 \u043d\u0435\u00a0\u0431\u0443\u0434\u0435\u0442 \u0440\u0430\u0441\u0441\u043c\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044c \u0437\u0430\u043a\u043e\u043d\u043e\u043f\u0440\u043e\u0435\u043a\u0442 \u043e\u00a0\u0432\u0432\u0435\u0434\u0435\u043d\u0438\u0438 QR-\u043a\u043e\u0434\u043e\u0432 \u0432\u00a0\u0441\u0430\u043c\u043e\u043b\u0435\u0442\u0430\u0445 \u0438\u00a0\u043f\u043e\u0435\u0437\u0434\u0430\u0445",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/gosduma-ne-budet-rassmatrivat-zakonoproekt-o-vvedenii-qr-kodov-v-samoletah-i-poezdah",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 08:26:03 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                5,
+                26,
+                3,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u041d\u0430\u0439\u0434\u0435\u043d \u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u0439 \u043f\u043e\u0433\u0438\u0431\u0448\u0438\u0439 \u0448\u0430\u0445\u0442\u0435\u0440 \u043d\u0430\u00a0\u00ab\u041b\u0438\u0441\u0442\u0432\u044f\u0436\u043d\u043e\u0439\u00bb",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/13/nayden-posledniy-pogibshiy-shahter-na-listvyazhnoy",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 08:25:05 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                5,
+                25,
+                5,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u00ab\u042d\u0442\u043e \u0447\u0430\u0441\u0442\u044c \u043c\u043e\u0435\u0433\u043e \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0430\u00a0\u2014 \u0431\u044b\u0442\u044c \u0432\u00a0\u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0438, \u0433\u0434\u0435 \u0433\u0440\u0443\u0441\u0442\u043d\u043e \u0438\u00a0\u0442\u0435\u043c\u043d\u043e\u00bb. \u0418\u043d\u0442\u0435\u0440\u0432\u044c\u044e \u0420\u0443\u0441\u043b\u0430\u043d\u0430 \u0411\u0435\u043b\u043e\u0433\u043e\u00a0\u2014 \u043e\u00a0\u0442\u043e\u043c, \u043f\u043e\u0447\u0435\u043c\u0443 \u0432\u043b\u0430\u0441\u0442\u0438 \u043e\u0442\u043c\u0435\u043d\u044f\u044e\u0442 \u0435\u0433\u043e \u043a\u043e\u043d\u0446\u0435\u0440\u0442\u044b, \u0446\u0435\u043d\u0437\u0443\u0440\u0435 \u043d\u0430\u00a0\u0442\u0435\u043b\u0435\u0432\u0438\u0434\u0435\u043d\u0438\u0438 \u0438\u00a0\u0434\u0435\u043f\u0440\u0435\u0441\u0441\u0438\u0438",
+            "author": "\u0410\u0448\u043e\u0442 \u0414\u0430\u043d\u0435\u043b\u044f\u043d",
+            "link": "https://meduza.io/feature/2021/12/13/eto-chast-moego-haraktera-byt-v-sostoyanii-gde-grustno-i-temno",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Mon, 13 Dec 2021 08:00:47 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                13,
+                5,
+                0,
+                47,
+                0,
+                347,
+                0
+            ]
+        },
+        {
+            "title": "\u0412\u00a0\u0415\u043a\u0430\u0442\u0435\u0440\u0438\u043d\u0431\u0443\u0440\u0433\u0435, \u0410\u0440\u0445\u0430\u043d\u0433\u0435\u043b\u044c\u0441\u043a\u0435 \u0438\u00a0\u041d\u043e\u0432\u043e\u0441\u0438\u0431\u0438\u0440\u0441\u043a\u0435 \u043f\u0440\u043e\u0448\u043b\u0438 \u0430\u043a\u0446\u0438\u0438 \u043f\u0440\u043e\u0442\u0438\u0432 \u0432\u0432\u0435\u0434\u0435\u043d\u0438\u044f QR-\u043a\u043e\u0434\u043e\u0432",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/12/v-ekaterinburge-arhangelske-i-novosibirske-proshli-aktsii-protiv-vvedeniya-qr-kodov",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 20:48:21 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                17,
+                48,
+                21,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u041c\u043e\u0440\u0433\u0435\u043d\u0448\u0442\u0435\u0440\u043d, \u0421\u043a\u0440\u0438\u043f\u0442\u043e\u043d\u0438\u0442, IC3PEAK \u0438\u00a0\u043b\u044f\u0433\u0443\u0448\u043a\u0430, \u043a\u043e\u0442\u043e\u0440\u0443\u044e \u043d\u0438\u043a\u0442\u043e \u043d\u0435\u00a0\u0436\u0434\u0430\u043b\u2026. \u00ab\u041c\u0435\u0434\u0443\u0437\u0430\u00bb \u0432\u044b\u0431\u0440\u0430\u043b\u0430 10 \u043b\u0443\u0447\u0448\u0438\u0445 \u043f\u0435\u0441\u0435\u043d \u0438\u00a0\u043a\u043b\u0438\u043f\u043e\u0432 \u043d\u0435\u0434\u0435\u043b\u0438",
+            "author": "\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440 \u0424\u0438\u043b\u0438\u043c\u043e\u043d\u043e\u0432",
+            "link": "https://meduza.io/slides/morgenshtern-skriptonit-ic3peak-i-lyagushka-kotoruyu-nikto-ne-zhdal",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 19:50:13 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                16,
+                50,
+                13,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u0421\u0442\u0440\u0430\u043d\u044b \u00ab\u0411\u043e\u043b\u044c\u0448\u043e\u0439 \u0441\u0435\u043c\u0435\u0440\u043a\u0438\u00bb \u043f\u0440\u0435\u0434\u0443\u043f\u0440\u0435\u0434\u0438\u043b\u0438 \u0420\u043e\u0441\u0441\u0438\u044e \u043e\u00a0\u0442\u044f\u0436\u0435\u043b\u044b\u0445 \u043f\u043e\u0441\u043b\u0435\u0434\u0441\u0442\u0432\u0438\u044f\u0445 \u0432\u00a0\u0441\u043b\u0443\u0447\u0430\u0435 \u043d\u0430\u043f\u0430\u0434\u0435\u043d\u0438\u044f \u043d\u0430\u00a0\u0423\u043a\u0440\u0430\u0438\u043d\u0443",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/12/strany-bolshoy-semerki-predupredili-rossiyu-o-tyazhelyh-posledstviyah-v-sluchae-napadeniya-na-ukrainu",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 19:31:43 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                16,
+                31,
+                43,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u0412\u00a0\u0425\u0430\u0431\u0430\u0440\u043e\u0432\u0441\u043a\u043e\u043c \u043a\u0440\u0430\u0435 \u0430\u0440\u0435\u0441\u0442\u043e\u0432\u0430\u043b\u0438 \u0434\u0432\u0443\u0445 \u0448\u043a\u043e\u043b\u044c\u043d\u0438\u0446\u00a0\u2014 \u0438\u0445\u00a0\u043f\u043e\u0434\u043e\u0437\u0440\u0435\u0432\u0430\u044e\u0442 \u0432\u00a0\u0438\u0437\u0431\u0438\u0435\u043d\u0438\u0438 \u043f\u0435\u043d\u0441\u0438\u043e\u043d\u0435\u0440\u0430 \u0434\u043e\u00a0\u0441\u043c\u0435\u0440\u0442\u0438. \u0414\u0440\u0443\u0433 \u0434\u0435\u0432\u0443\u0448\u0435\u043a \u0437\u0430\u044f\u0432\u0438\u043b, \u0447\u0442\u043e \u043e\u043d\u0438 \u00ab\u0434\u043e\u0431\u0440\u044b\u0435 \u0438\u00a0\u043f\u043e\u0437\u0438\u0442\u0438\u0432\u043d\u044b\u0435\u00bb",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/feature/2021/12/12/v-habarovskom-krae-arestovali-dvuh-shkolnits-ih-podozrevayut-v-izbienii-pensionera-do-smerti-drug-devushek-zayavil-chto-oni-dobrye-i-pozitivnye",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 19:12:15 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                16,
+                12,
+                15,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u041c\u0430\u043a\u0441 \u0424\u0435\u0440\u0441\u0442\u0430\u043f\u043f\u0435\u043d \u0432\u044b\u0438\u0433\u0440\u0430\u043b \u0413\u0440\u0430\u043d-\u043f\u0440\u0438 \u0410\u0431\u0443-\u0414\u0430\u0431\u0438 \u0438\u00a0\u0441\u0442\u0430\u043b \u0447\u0435\u043c\u043f\u0438\u043e\u043d\u043e\u043c \u00ab\u0424\u043e\u0440\u043c\u0443\u043b\u044b-1\u00bb. \u041d\u0438\u043a\u0438\u0442\u0430 \u041c\u0430\u0437\u0435\u043f\u0438\u043d \u043f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u043b \u0444\u0438\u043d\u0430\u043b\u044c\u043d\u0443\u044e \u0433\u043e\u043d\u043a\u0443 \u0438\u0437-\u0437\u0430 \u043a\u043e\u0432\u0438\u0434\u0430",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/12/maks-ferstappen-vyigral-gran-pri-abu-dabi-i-stal-chempionom-formuly-1-nikita-mazepin-propustil-finalnuyu-gonku-iz-za-kovida",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 17:57:44 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                14,
+                57,
+                44,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u00ab\u0414\u043b\u044f \u043c\u0435\u043d\u044f \u041c\u0430\u0440\u0430\u0434\u043e\u043d\u0430\u00a0\u2014 \u0431\u043e\u0436\u0435\u0441\u0442\u0432\u043e, \u0443\u043c\u0438\u0440\u0430\u044e\u0449\u0435\u0435 \u043d\u0430\u00a0\u043a\u0440\u0435\u0441\u0442\u0435 \u0438\u00a0\u0432\u043e\u0441\u043a\u0440\u0435\u0441\u0430\u044e\u0449\u0435\u0435 \u043f\u043e\u0442\u043e\u043c\u00bb. \u0412\u044b\u0445\u043e\u0434\u0438\u0442 \u00ab\u0420\u0443\u043a\u0430 \u0431\u043e\u0433\u0430\u00bb, \u0444\u0438\u043b\u044c\u043c \u043e\u00a0\u043d\u0435\u0430\u043f\u043e\u043b\u0438\u0442\u0430\u043d\u0441\u043a\u043e\u043c \u0434\u0435\u0442\u0441\u0442\u0432\u0435 \u041f\u0430\u043e\u043b\u043e \u0421\u043e\u0440\u0440\u0435\u043d\u0442\u0438\u043d\u043e. \u041e\u043d\u00a0\u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0430\u043b \u043d\u0430\u043c \u043e\u00a0\u0441\u0432\u043e\u0435\u0439 \u0441\u0430\u043c\u043e\u0439 \u043b\u0438\u0447\u043d\u043e\u0439 \u0440\u0430\u0431\u043e\u0442\u0435",
+            "author": "\u0410\u043d\u0442\u043e\u043d \u0414\u043e\u043b\u0438\u043d",
+            "link": "https://meduza.io/feature/2021/12/12/dlya-menya-maradona-bozhestvo-umirayuschee-na-kreste-i-voskresayuschee-potom",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 17:29:32 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                14,
+                29,
+                32,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u041f\u0443\u0442\u0438\u043d \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0430\u043b \u043e\u0431\u00a0\u0430\u043c\u0435\u0440\u0438\u043a\u0430\u043d\u0446\u0430\u0445, \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u0432\u00a01990-\u0435 \u00ab\u043a\u0430\u043a \u043d\u0430\u00a0\u0440\u0430\u0431\u043e\u0442\u0443 \u0445\u043e\u0434\u0438\u043b\u0438\u00bb \u043d\u0430\u00a0\u0440\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u0438\u0435 \u044f\u0434\u0435\u0440\u043d\u044b\u0435 \u043f\u0440\u0435\u0434\u043f\u0440\u0438\u044f\u0442\u0438\u044f",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/12/putin-rasskazal-ob-amerikanskih-spetsialistah-kotorye-v-1990-e-kak-na-rabotu-hodili-na-rossiyskie-yadernye-predpriyatiya",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 16:48:27 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                13,
+                48,
+                27,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u041a\u0430\u043a \u0430\u0434\u0432\u043e\u043a\u0430\u0442\u0443 \u0436\u0438\u0442\u044c \u0438\u00a0\u0440\u0430\u0431\u043e\u0442\u0430\u0442\u044c \u0432\u00a0\u0441\u0442\u0430\u0442\u0443\u0441\u0435 \u00ab\u0438\u043d\u043e\u0430\u0433\u0435\u043d\u0442\u0430\u00bb? \u0412\u0430\u043b\u0435\u0440\u0438\u044f \u0412\u0435\u0442\u043e\u0448\u043a\u0438\u043d\u0430 \u0438\u0437\u00a0\u00ab\u041a\u043e\u043c\u0430\u043d\u0434\u044b 29\u00bb \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u043e\u0431\u00a0\u044d\u0442\u043e\u043c \u041a\u0435\u0432\u0438\u043d\u0443 \u0420\u043e\u0442\u0440\u043e\u043a\u0443\u00a0\u2014 \u0432\u00a0\u043f\u043e\u0434\u043a\u0430\u0441\u0442\u0435 The Naked Pravda",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/feature/2021/12/12/kak-advokatu-zhit-i-rabotat-v-statuse-inoagenta",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 15:03:00 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                12,
+                3,
+                0,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u00ab\u041e\u0441\u043e\u0431\u044b\u0445 \u043f\u043e\u0432\u043e\u0434\u043e\u0432 \u0434\u043b\u044f \u0440\u0430\u0434\u043e\u0441\u0442\u0438 \u043d\u0435\u00a0\u0431\u044b\u043b\u043e\u00bb. \u041f\u0435\u0441\u043a\u043e\u0432\u00a0\u2014 \u043e\u00a0\u043f\u0435\u0440\u0435\u0433\u043e\u0432\u043e\u0440\u0430\u0445 \u043f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u043e\u0432 \u0420\u043e\u0441\u0441\u0438\u0438 \u0438\u00a0\u0421\u0428\u0410",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/12/osobyh-povodov-dlya-radosti-ne-bylo-peskov-o-peregovorah-prezidentov-rossii-i-ssha",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 14:51:35 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                11,
+                51,
+                35,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u041d\u0435\u00a0\u0437\u043d\u0430\u0435\u0442\u0435, \u043a\u0443\u0434\u0430 \u0441\u044a\u0435\u0437\u0434\u0438\u0442\u044c \u043d\u0430\u00a0\u043d\u043e\u0432\u043e\u0433\u043e\u0434\u043d\u0438\u0435 \u043a\u0430\u043d\u0438\u043a\u0443\u043b\u044b? \u0418\u0434\u0435\u0430\u043b\u044c\u043d\u044b\u0439 \u0432\u0430\u0440\u0438\u0430\u043d\u0442 \u0434\u043b\u044f \u044f\u043d\u0432\u0430\u0440\u044f\u00a0\u2014 \u0437\u0430\u043f\u043e\u0432\u0435\u0434\u043d\u0438\u043a\u0438 \u0438\u00a0\u043d\u0430\u0446\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0435 \u043f\u0430\u0440\u043a\u0438. \u0412\u043e\u0442 \u0432\u043e\u0441\u0435\u043c\u044c \u0434\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u044c\u0441\u0442\u0432",
+            "author": "\u041d\u0430\u0442\u0430\u043b\u044c\u044f \u0427\u0435\u0440\u043a\u0430\u0441\u043e\u0432\u0430",
+            "link": "https://meduza.io/slides/ne-znaete-kuda-s-ezdit-na-novogodnie-kanikuly-idealnyy-variant-dlya-yanvarya-zapovedniki-i-natsionalnye-parki",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 14:35:55 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                11,
+                35,
+                55,
+                6,
+                346,
+                0
+            ]
+        },
+        {
+            "title": "\u0423\u043c\u0435\u0440\u043b\u0430 \u0430\u0432\u0442\u043e\u0440 \u00ab\u0418\u043d\u0442\u0435\u0440\u0432\u044c\u044e \u0441\u00a0\u0432\u0430\u043c\u043f\u0438\u0440\u043e\u043c\u00bb \u042d\u043d\u043d \u0420\u0430\u0439\u0441",
+            "author": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "link": "https://meduza.io/news/2021/12/12/umerla-avtor-intervyu-s-vampirom-enn-rays",
+            "source_name": "\u041c\u0435\u0434\u0443\u0437\u0430",
+            "publication_date": "Sun, 12 Dec 2021 13:43:55 +0300",
+            "publication_date_parsed": [
+                2021,
+                12,
+                12,
+                10,
+                43,
+                55,
+                6,
+                346,
+                0
+            ]
+        }
+    ],
+    "strange authors": [
+        "\u041f\u0435\u0440\u0435\u0441\u043a\u0430\u0437\u0430\u043b \u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440 \u0411\u0430\u043a\u043b\u0430\u043d\u043e\u0432",
+        "\u041f\u0435\u0440\u0435\u0441\u043a\u0430\u0437\u0430\u043b \u0410\u043b\u0435\u043a\u0441\u0435\u0439 \u041a\u043e\u0432\u0430\u043b\u0435\u0432"
+    ]
+}
