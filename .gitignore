@@ -128,6 +128,7 @@ dmypy.json
 
 
 # my stuff
-*.db
+weedly.db
 commands
 temp.py
+commands.txt
