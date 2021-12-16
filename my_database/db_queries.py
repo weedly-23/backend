@@ -1,7 +1,7 @@
 '''тут функции для обращения к БД'''
 
 from datetime import datetime
-from .models import db, News
+from my_database.models import db, News
 import dateutil.parser
 
 def add_news(data:list):
@@ -15,7 +15,6 @@ def add_news(data:list):
         'publication_date_parsed': ''
         }
     '''
-
     for article in data:
         # распарсили дату
         if isinstance(article['published'],list):
@@ -40,6 +39,7 @@ def add_news(data:list):
 
 def fast_add_news(data):
     '''если ключи передаваемых словарей соответствуют полям в таблице News. так быстрее'''
+    print(data)
     db.session.bulk_insert_mappings(News, data)
     db.session.commit()
 
@@ -50,7 +50,4 @@ def get_latest_news(how_many = 3):
     '''
     news = db.session.query(News).order_by(News.published.desc())[:how_many]
     return news
-
-
-
 

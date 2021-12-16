@@ -7,6 +7,7 @@ def create_app():
     models.db.init_app(app)
 
 
+
     @app.route('/', methods=['GET'])
     def say_hello():
         hello_dict = {"hello": "dict"}
