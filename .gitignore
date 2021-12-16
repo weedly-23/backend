@@ -1,3 +1,9 @@
+# my stuff
+weedly.db
+commands
+temp.py
+commands.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -126,9 +132,3 @@ dmypy.json
 .idea
 .venv
 
-
-# my stuff
-weedly.db
-commands
-temp.py
-commands.txt
