@@ -99,8 +99,8 @@ celerybeat-schedule
 .env
 .venv
 env/
-venv/
 ENV/
+venv/
 env.bak/
 venv.bak/
 
@@ -125,3 +125,9 @@ dmypy.json
 #pycharm
 .idea
 .venv
+
+
+# my stuff
+*.db
+commands
+temp.py

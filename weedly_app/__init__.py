@@ -1,11 +1,10 @@
 from flask import Flask
+from my_database import models, db_queries
 
 def create_app():
-    from bd.models import db
-    import bd.db_queries
     app = Flask(__name__)
     app.config.from_pyfile('../config.py')
-    db.init_app(app)
+    models.db.init_app(app)
 
 
     @app.route('/', methods=['GET'])
@@ -17,7 +16,7 @@ def create_app():
     @app.route('/feed', methods=['GET'])
     def get_feeds():
         '''параметр у get_latest_news - количество статей'''
-        news = bd.db_queries.get_latest_news(5)
+        news = db_queries.get_latest_news(5)
         news = [e.title for e in news] # взяли только заголовки
         return {'main_news': news}
 
@@ -42,3 +41,5 @@ def create_app():
         return "This removes a feed by ID."
 
     return app
+
+app = create_app()

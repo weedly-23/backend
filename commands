@@ -1,1 +1,5 @@
 set flask_app=weedly_app && set flask_env=development && set flask_debug=1 && flask run
+
+Во время разработки - можно стартовать из weedly/__main__.py через app.run(host='0.0.0.0', port=5000)
+
+python -m weedly
