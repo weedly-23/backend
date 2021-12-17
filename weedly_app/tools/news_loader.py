@@ -4,8 +4,8 @@ import json
 
 def get_test_news_for_db()-> list:
     '''загружает тестовые новости для ДБ'''
-    file = 'kommersant.json'
-    file2 = 'meduza.json'
+    file = 'weedly_app/db/kommersant.json'
+    file2 = 'weedly_app/db/meduza.json'
     files = [file, file2]
     print('files---',files)
     results = []
@@ -16,4 +16,10 @@ def get_test_news_for_db()-> list:
 
     return sum(results,[])
 
+
+def get_news_from_file(file):
+    '''загружается новости'''
+    with open(file, 'r', encoding='utf-8') as f:
+        data = json.load(f)['norm authors']
+        return data
 
