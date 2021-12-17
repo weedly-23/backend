@@ -1,1 +1,0 @@
-set flask_app=weedly_app && set flask_env=development && set flask_debug=1 && flask run

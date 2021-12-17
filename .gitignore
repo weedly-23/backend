@@ -1,3 +1,9 @@
+# my stuff
+weedly.db
+commands
+temp.py
+commands.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -99,8 +105,8 @@ celerybeat-schedule
 .env
 .venv
 env/
-venv/
 ENV/
+venv/
 env.bak/
 venv.bak/
 
@@ -125,3 +131,4 @@ dmypy.json
 #pycharm
 .idea
 .venv
+
