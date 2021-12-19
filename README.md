@@ -1,14 +1,12 @@
 # Бэкэнд с БД на Sqlite
 
 ## Создание БД
-В папке db.models прописаны модели (таблицы). 
+В папке db  .models прописаны модели (таблицы). 
 News соответствует формату, который отдают наши парсеры.
 
 Создать пустую локальную БД:
 
- 
-python -m weedly_app.db.create_news_db create-db 
-
+python -m weedly_app.db.create_db create-news-db 
 
 Добавить в таблицу с новостями новости из json файла:
 
@@ -16,7 +14,7 @@ python -m weedly_app.db.create_db add-news-from-file "file path"
 
 Создать локальную БД с тестовыми данными:
 
-python -m weedly_app.db.create_news_db create-db --fill-with-data
+python -m weedly_app.db.create_db create-news-db --fill-with-data
 
 В нее сразу загрузятся 80 тестовых новостей из .json, которые лежат рядом (загрузчик новостей лежит в tools). 
 

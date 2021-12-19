@@ -5,10 +5,8 @@ from weedly_app.db import db_queries
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_pyfile('../config.py')
+    app.config.from_pyfile('config.py')
     models.db.init_app(app)
-
-
 
     @app.route('/', methods=['GET'])
     def say_hello():
@@ -47,3 +45,6 @@ def create_app():
 
 
 app = create_app()
+#
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=5000, debug=True)
