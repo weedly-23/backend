@@ -3,6 +3,10 @@ weedly.db
 commands
 temp.py
 commands.txt
+*.yml
+test-app.py
+test-db.py
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
