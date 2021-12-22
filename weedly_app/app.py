@@ -6,6 +6,7 @@ from weedly_app.db import db_queries
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
+
     models.db.init_app(app)
 
     @app.route('/', methods=['GET'])
