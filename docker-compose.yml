@@ -1,0 +1,34 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - .data/postgress:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_USER=example
+      - POSTGRES_DB=mydatabase
+
+    restart: always
+    ports:
+      - 5432:5432
+    networks:
+      - backend-network
+
+  weedly-app:
+    build: ./weedly_app
+    container_name: weedly-docker
+    environment:
+      - FLASK_ENV=development
+      - PYTHONUNBUFFERED=True
+      - DB_URL = postgresql://example:example@db:5432/mydatabase
+
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+
+networks:
+  backend-network:
+    external: true
