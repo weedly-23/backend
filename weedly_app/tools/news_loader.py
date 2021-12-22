@@ -4,8 +4,8 @@ import json
 
 def get_test_news_for_db()-> list:
     '''загружает тестовые новости для ДБ'''
-    file = 'weedly_app/db/kommersant.json'
-    file2 = 'weedly_app/db/meduza.json'
+    file = 'data/kommersant.json'
+    file2 = 'data/meduza.json'
     files = [file, file2]
     print('files---',files)
     results = []

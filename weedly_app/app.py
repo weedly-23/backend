@@ -1,6 +1,6 @@
 from flask import Flask
 from weedly_app.db import models
-from weedly_app.db import db_queries
+from weedly_app.db.db_queries import NewsRepo
 
 
 def create_app():
@@ -8,6 +8,8 @@ def create_app():
     app.config.from_pyfile('config.py')
 
     models.db.init_app(app)
+
+    news_repo = NewsRepo()
 
     @app.route('/', methods=['GET'])
     def say_hello():
@@ -18,7 +20,7 @@ def create_app():
     @app.route('/feed', methods=['GET'])
     def get_feeds():
         '''параметр у get_latest_news - количество статей'''
-        news = db_queries.get_latest_news(5)
+        news = news_repo.get_latest_news(5)
         news = [e.title for e in news] # взяли только заголовки
         return {'main_news': news}
 
