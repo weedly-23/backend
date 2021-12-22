@@ -48,4 +48,5 @@ def get_latest_news(how_many = 3):
     return news
 
 
-
+if __name__ == '__main__':
+    print(get_latest_news())
