@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class News(db.Model):
+class News(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
 
     title = db.Column(db.String, nullable=False)
@@ -15,7 +15,7 @@ class News(db.Model):
         return f'News.title:{self.title}'
 
 
-class Users(db.Model):
+class Users(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
     authors = db.Column(db.String, nullable=False)
 
