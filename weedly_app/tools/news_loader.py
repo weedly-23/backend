@@ -1,11 +1,13 @@
 '''загрузить тестовый набор новостей в нашем формате'''
 
 import json
+from typing import Any
 
-def get_test_news_for_db()-> list:
+
+def get_test_news_for_db()-> list[dict[str, Any]]:
     '''загружает тестовые новости для ДБ'''
-    file = 'weedly_app/db/kommersant.json'
-    file2 = 'weedly_app/db/meduza.json'
+    file = 'data/kommersant.json'
+    file2 = 'data/meduza.json'
     files = [file, file2]
     print('files---',files)
     results = []
