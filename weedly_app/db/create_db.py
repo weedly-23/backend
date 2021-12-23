@@ -1,7 +1,7 @@
 '''создаем базу локально и заполняем ее тестоыми данными'''
 import typer
 from weedly_app import create_app
-from weedly_app.tools.news_loader import get_test_news_for_db, get_news_from_file
+from weedly_app.db.data.tools.news_loader import get_test_news_for_db, get_news_from_file
 from weedly_app.db.db_queries import add_news
 from weedly_app.db.models import db, News
 

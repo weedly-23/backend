@@ -1,50 +1,61 @@
-from flask import Flask
-from weedly_app.db import models
-from weedly_app.db import db_queries
-
+from flask import Flask, request
+from weedly_app.db import model
+from weedly_app.db.crud import PostgreStorage
+from weedly_app.db.model import News
+import arrow
 
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
-    models.db.init_app(app)
+    model.db.init_app(app)
 
-    @app.route('/', methods=['GET'])
-    def say_hello():
-        hello_dict = {"hello": "dict"}
-        return hello_dict
+    news = PostgreStorage(News)
 
-
-    @app.route('/feed', methods=['GET'])
-    def get_feeds():
-        '''параметр у get_latest_news - количество статей'''
-        news = db_queries.get_latest_news(5)
-        news = [e.title for e in news] # взяли только заголовки
-        return {'main_news': news}
+    @app.route('/api/v1/feeds', methods=['GET'])
+    def get_all():
+        get_all_res = news.query_as_json(news.get_all(num_rows=20))
+        return get_all_res
 
 
-    @app.route('/feed/<int:feed_id>', methods=['GET'])
-    def get_feed(feed_id):
-        return "This returns one feed by ID"
+    @app.route('/api/v1/feeds/<int:index>', methods=['GET'])
+    def get_one(index):
+        if news._id_in_table(index):
+            get_one_res = news.query_as_json(news.get_one(index))
+            return get_one_res
+        else:
+            return {"message": f"We don't have index {index}"}, 404
 
 
-    @app.route('/feed', methods=['POST'])
-    def add_feed(data):
-        return "This adds a new feed."
+    @app.route('/api/v1/feeds/', methods=['POST'])
+    def add_one():
+        payload = request.json
+        if "published" in payload:
+            try:
+                a = arrow.get(payload["published"])
+                payload["published"] = a.datetime
+            except:
+                return {"message": f"Bad 'published' field format {payload['published']}"}, 400
+        news.add(payload)
+        return payload
 
+    @app.route('/api/v1/feeds/<int:index>', methods=['DELETE'])
+    def delete_one(index):
+        if news.delete(index):
+            return {"message": f"Successfully deleted index {index}"}, 200
+        return {"message": f"We were not able to delete index {index}"}, 400
 
-    @app.route('/feed/<int:feed_id>', methods=['PUT', 'PATCH'])
-    def edit_feed(feed_id):
-        return "This updates a feed by ID."
-
-
-    @app.route('/feed/<int:feed_id>', methods=['DELETE'])
-    def delete_feed(feed_id):
-        return "This removes a feed by ID."
+    @app.route('/api/v1/feeds/<int:index>', methods=['PUT'])
+    def update_one(index):
+        payload = request.json
+        try:
+            a = arrow.get(payload["published"])
+            payload["published"] = a.datetime
+        except:
+            return {"message": f"Bad 'published' field format {payload['published']}"}, 400
+        if news.update(index, payload):
+            return {"message": f"Successfully updated {index}"}
+        return {"message": f"We were not able to update index {index}"}, 404
 
     return app
 
-
 app = create_app()
-#
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5000, debug=True)

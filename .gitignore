@@ -136,3 +136,5 @@ dmypy.json
 .idea
 .venv
 
+#db_password
+weedly_app/db/config_db.py

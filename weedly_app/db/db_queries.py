@@ -44,8 +44,17 @@ def get_latest_news(how_many = 3):
     отдает последние новости в виде списка объектов models.News.
     атрибуты (заголовок, ссылка и тд) можно получить через точку.
     '''
-    news = db.session.query(News).order_by(News.published.desc())[:how_many]
+    # news = db.session.query(News).order_by(News.published.desc())[:how_many]
+    from weedly_app.app import create_app
+    app = create_app()
+    with app.app_context():
+        db.create_all(app=app)
+        news = db.session.query(News).order_by(News.published.desc())[:how_many]
+        return news
     return news
 
-
+if __name__ == "__main__":
+    news = get_latest_news(10)
+    for i, n in enumerate(news):
+        print(f"{i}. {n}")
 
