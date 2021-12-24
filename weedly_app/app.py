@@ -1,12 +1,15 @@
+import arrow
 from flask import Flask, request
+
 from weedly_app.db import model
 from weedly_app.db.crud import PostgreStorage
 from weedly_app.db.model import News
-import arrow
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
+
     model.db.init_app(app)
 
     news = PostgreStorage(News)
@@ -16,15 +19,13 @@ def create_app():
         get_all_res = news.query_as_json(news.get_all(num_rows=20))
         return get_all_res
 
-
-    @app.route('/api/v1/feeds/<int:index>', methods=['GET'])
-    def get_one(index):
-        if news._id_in_table(index):
-            get_one_res = news.query_as_json(news.get_one(index))
+    @app.route('/api/v1/feeds/<int:uid>', methods=['GET'])
+    def get_one(uid):
+        if news._id_in_table(uid):
+            get_one_res = news.query_as_json(news.get_one(uid))
             return get_one_res
         else:
-            return {"message": f"We don't have index {index}"}, 404
-
+            return {"message": f"We don't have index {uid}"}, 404
 
     @app.route('/api/v1/feeds/', methods=['POST'])
     def add_one():
