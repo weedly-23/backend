@@ -5,21 +5,36 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "create db",
-            "type": "python",
-            "request": "launch",
-            "module": "weedly_app.db.create_db",
-            "console": "internalConsole",
-            "args": ["create-news-db", "--fill-with-data"],
-            "justMyCode": false,
-        },
-        {
             "name": "api",
             "type": "python",
             "request": "launch",
-            "module": "weedly_app",
+            "module": "weedly",
             "console": "internalConsole",
             "justMyCode": false,
         },
+        {
+          "name": "db.create",
+          "type": "python",
+          "request": "launch",
+          "module": "weedly.db.model",
+          "console": "internalConsole",
+          "justMyCode": false,
+        },
+        {
+          "name": "db.fake.create",
+          "type": "python",
+          "request": "launch",
+          "module": "weedly.tools.fake.create",
+          "console": "internalConsole",
+          "justMyCode": false,
+        },
+        {
+          "name": "db.fake.save",
+          "type": "python",
+          "request": "launch",
+          "module": "weedly.tools.fake.save",
+          "console": "internalConsole",
+          "justMyCode": false,
+        }
     ]
 }

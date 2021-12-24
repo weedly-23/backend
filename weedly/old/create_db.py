@@ -1,9 +1,10 @@
 '''создаем базу локально и заполняем ее тестоыми данными'''
 import typer
-from weedly_app import create_app
-from weedly_app.tools.news_loader import get_test_news_for_db, get_news_from_file
-from weedly_app.db.db_queries import NewsRepo
-from weedly_app.db.models import db, News
+from weedly import create_app
+
+from weedly.db.data.tools.news_loader import get_test_news_for_db, get_news_from_file
+from weedly.db.db_queries import NewsRepo
+from weedly.db.model import db, News
 
 
 typer_app = typer.Typer()
@@ -32,7 +33,7 @@ def add_news_from_file(file):
 def reset_news_table():
     app = create_app()
     with app.app_context():
-        all_news = db.session.query(News).filter().delete()
+        db.session.query(News).filter().delete()
         db.session.commit()
         print('удалили все новости из БД')
 

@@ -135,5 +135,8 @@ dmypy.json
 .idea
 .venv
 
+# macos files
+.DS_Store
+
 # postgres data
 .data
