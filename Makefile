@@ -27,3 +27,6 @@ db.fake.save: db.fake.create
 db.clean:
 	@echo "clean all resources: db"
 	@docker-compose down -t1
+
+run:
+	@python -m weedly
