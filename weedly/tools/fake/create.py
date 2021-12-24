@@ -1,4 +1,6 @@
 import csv
+from pathlib import Path
+
 from faker import Faker
 from faker.providers import DynamicProvider
 
@@ -28,8 +30,8 @@ def add_news_providers() -> None:
 add_news_providers()
 
 
-def generate_data(num_rows=100):
-    with open('fakenews.csv', 'w', encoding='utf-8') as f:
+def generate_data(filepath: Path, num_rows=100):
+    with open(filepath, 'w', encoding='utf-8') as f:
         writer = csv.writer(f, delimiter=';')
         for _ in range(num_rows):
             writer.writerow(_get_fake_row())
@@ -53,5 +55,9 @@ def get_fake_row_dict():
         print(f"We were not able to convert a fake row into a zip:"
               f"len headers {len(headers)}, len fake row {len(fake_row)}")
 
+
 if __name__ == '__main__':
-    generate_data()
+    datadir = Path('.data') / 'fake'
+    datadir.mkdir(parents=True, exist_ok=True)
+    filepath = datadir / 'fakenews.csv'
+    generate_data(filepath)

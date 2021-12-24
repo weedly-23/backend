@@ -1,4 +1,4 @@
-from weedly_app.db.db import Base, engine
+from weedly.db.db import Base, engine
 from sqlalchemy import Column, Integer, String, DateTime
 from flask_sqlalchemy import SQLAlchemy
 
@@ -7,6 +7,7 @@ db = SQLAlchemy()
 class News(Base):
     __tablename__ = "news"
     __table_args__ = {'extend_existing': True}
+
     id = Column(Integer, primary_key=True)
     title = Column(String, nullable=False)
     author = Column(String, nullable=False)
@@ -21,6 +22,7 @@ class News(Base):
 class Users(Base):
     __tablename__ = "users"
     __table_args__ = {'extend_existing': True}
+
     id = Column(Integer, primary_key=True)
     authors = Column(String, nullable=False)
 

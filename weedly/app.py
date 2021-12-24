@@ -1,9 +1,9 @@
 import arrow
 from flask import Flask, request
 
-from weedly_app.db import model
-from weedly_app.db.crud import PostgreStorage
-from weedly_app.db.model import News
+from weedly.db import model
+from weedly.db.crud import PostgreStorage
+from weedly.db.model import News
 
 
 def create_app():
@@ -14,7 +14,7 @@ def create_app():
 
     news = PostgreStorage(News)
 
-    @app.route('/api/v1/feeds', methods=['GET'])
+    @app.route('/api/v1/feeds/', methods=['GET'])
     def get_all():
         get_all_res = news.query_as_json(news.get_all(num_rows=20))
         return get_all_res

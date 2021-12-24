@@ -7,9 +7,10 @@ from typing import Dict, Any
 import json
 
 
-from weedly_app.db.db import db_session
-from weedly_app.db.model import News
-from weedly_app.db.data.fakenews_upload.create_fake_news import get_fake_row_dict
+from weedly.db.db import db_session
+from weedly.db.model import News
+
+from weedly.tools.fake.create import get_fake_row_dict
 
 
 class Storage(ABC):

@@ -1,7 +1,6 @@
-'''тут функции для обращения к БД'''
 from typing import Any
 
-from weedly_app.db.models import db, News
+from weedly.db.model import db, News
 import arrow
 
 
