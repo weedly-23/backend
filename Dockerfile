@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM python:3.9-slim
 
-ENV PYTHONUNBUFFERED=True
+ENV PYTHONUNBUFFERED=True \
+    POETRY_VIRTUALENVS_CREATE=False
 
 WORKDIR /app
 EXPOSE 5000
