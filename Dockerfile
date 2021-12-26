@@ -6,10 +6,12 @@ ENV PYTHONUNBUFFERED=True
 WORKDIR /app
 EXPOSE 5000
 
-COPY requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
+RUN pip install poetry
+
+COPY pyproject.toml poetry.lock /app/
+RUN poetry install --no-dev
 
 COPY data /app/data
-COPY weedly_app /app/weedly_app
+COPY weedly /app/weedly
 
-CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD [ "poetry", "run", "python", "-m", "weedly"]

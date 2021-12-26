@@ -2,7 +2,7 @@ import arrow
 from flask import Flask, request
 
 from weedly.db import model
-from weedly.db.crud import PostgreStorage
+from weedly.db.repos.postgres import PostgreStorage
 from weedly.db.model import News
 
 
@@ -30,12 +30,18 @@ def create_app():
     @app.route('/api/v1/feeds/', methods=['POST'])
     def add_one():
         payload = request.json
-        if "published" in payload:
-            try:
-                a = arrow.get(payload["published"])
-                payload["published"] = a.datetime
-            except:
-                return {"message": f"Bad 'published' field format {payload['published']}"}, 400
+        if not payload:
+            return {'message': 'No payload'}, 400
+
+        if 'published' not in payload:
+            return {'message': 'No published field'}, 400
+
+        try:
+            published = arrow.get(payload['published'])
+            payload['published'] = published.datetime
+        except Exception:
+            return {'message': f"Bad 'published' field format {payload['published']}"}, 400
+
         news.add(payload)
         return payload
 
