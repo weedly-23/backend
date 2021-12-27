@@ -62,3 +62,74 @@ Get all news:
 curl --request GET \
   --url http://localhost:5000/api/v1/feeds/
 ```
+
+## Swagger Api Docs
+
+```text
+## get all media resources
+GET /api/v1/media/
+
+## get media info
+GET /api/v1/media/{uid}
+
+## get media feeds
+GET /api/v1/media/{uid}/feeds/
+[rss1, rss2]
+
+## get all media authors
+GET /api/v1/media/{uid}/authors/
+
+## get articles for each authors
+GET /api/v1/authors/{uid}/articles/
+
+## get authors rating
+GET /api/v1/authors/{uid}/rating
+
+## get authors
+GET /api/v1/authors/{uid}
+
+## get articles from user best authors
+GET /api/v1/users/{uid}/articles/
+
+# First priority
+
+## get articles from media feed
+GET /api/v1/feeds/{rss-id}/articles/
+
+## get feeds for rss parser
+GET /api/v1/feeds/?title=hacker&category=it
+title='Hackernews'
+category='IT'
+rss_url='rss://'
+where not is_deleted
+
+## add any rss feed for adminstrators
+POST /api/v1/feeds/
+
+DELETE /api/v1/feeds/{uid} for adminstrators
+is_deleted
+
+## get articles from
+GET /api/v1/feeds/{uid}/articles/
+```
+
+1 stage:
+/feeds -> /articles
+model.news -> articles
+model.feeds with title, rss, category (index)
+model.users -> feeds
+model.articles -> feeds
+
+POST /api/v1/feeds/
+GET /api/v1/feeds/?title=hacker&category=it
+POST /api/v1/articles/
+DELETE /api/v1/articles/{uid}  # is_deleted
+
+2 stage:
+add users with user feeds
+
+3 stage:
+async notifications from my best feeds
+
+4 stage:
+add media
