@@ -3,7 +3,7 @@ from flask import Flask, request
 
 from weedly.db import model
 from weedly.db.repos.postgres import PostgreStorage
-from weedly.db.model import News
+from weedly.db.model import Articles
 
 
 def create_app():
@@ -12,14 +12,14 @@ def create_app():
 
     model.db.init_app(app)
 
-    news = PostgreStorage(News)
+    news = PostgreStorage(Articles)
 
-    @app.route('/api/v1/feeds/', methods=['GET'])
+    @app.route('/api/v1/articles/', methods=['GET'])
     def get_all():
         get_all_res = news.query_as_json(news.get_all(num_rows=20))
         return get_all_res
 
-    @app.route('/api/v1/feeds/<int:uid>', methods=['GET'])
+    @app.route('/api/v1/articles/<int:uid>', methods=['GET'])
     def get_one(uid):
         if news._id_in_table(uid):
             get_one_res = news.query_as_json(news.get_one(uid))
@@ -27,7 +27,7 @@ def create_app():
         else:
             return {"message": f"We don't have index {uid}"}, 404
 
-    @app.route('/api/v1/feeds/', methods=['POST'])
+    @app.route('/api/v1/articles/', methods=['POST'])
     def add_one():
         payload = request.json
         if not payload:
@@ -45,13 +45,13 @@ def create_app():
         news.add(payload)
         return payload
 
-    @app.route('/api/v1/feeds/<int:index>', methods=['DELETE'])
+    @app.route('/api/v1/articles/<int:index>', methods=['DELETE'])
     def delete_one(index):
         if news.delete(index):
             return {"message": f"Successfully deleted index {index}"}, 200
         return {"message": f"We were not able to delete index {index}"}, 400
 
-    @app.route('/api/v1/feeds/<int:index>', methods=['PUT'])
+    @app.route('/api/v1/articles/<int:index>', methods=['PUT'])
     def update_one(index):
         payload = request.json
         try:

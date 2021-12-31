@@ -3,7 +3,7 @@ import time
 from pathlib import Path
 
 from weedly.db.db import db_session
-from weedly.db.model import News
+from weedly.db.model import Articles
 
 
 def from_csv(filepath: Path):
@@ -21,7 +21,7 @@ def from_csv(filepath: Path):
 
 def save_data(filepath: Path):
     data = from_csv(filepath)
-    db_session.bulk_insert_mappings(News, data)
+    db_session.bulk_insert_mappings(Articles, data)
     db_session.commit()
 
 

@@ -114,11 +114,14 @@ GET /api/v1/feeds/{uid}/articles/
 ```
 
 1 stage:
-/feeds -> /articles
-model.news -> articles
+#/feeds -> /articles
+#model.news -> articles
+
 model.feeds with title, rss, category (index)
 model.users -> feeds
+
 model.articles -> feeds
+
 
 POST /api/v1/feeds/
 GET /api/v1/feeds/?title=hacker&category=it
