@@ -3,7 +3,7 @@ import time
 from pathlib import Path
 
 from weedly.db.db import db_session
-from weedly.db.model import Articles
+from weedly.db.models import Articles
 
 
 def from_csv(filepath: Path):
