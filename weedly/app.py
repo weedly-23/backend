@@ -1,67 +1,21 @@
-import arrow
 from flask import Flask, request
 
-from weedly.db import model
-from weedly.db.repos.postgres import PostgreStorage
-from weedly.db.model import News
-
+from weedly.db import models
+from weedly.db.db_funs import DataGetter
 
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
+    models.db.init_app(app)
 
-    model.db.init_app(app)
+    getter = DataGetter()
 
-    news = PostgreStorage(News)
+    @app.route('/api/v2/feeds/<string:feed_name>/authors/', methods=['GET'])
+    def get_all_authors_of_a_feed(feed_name):
+        '''получить все статьи по названию фида (meduza, wired, vc)'''
 
-    @app.route('/api/v1/feeds/', methods=['GET'])
-    def get_all():
-        get_all_res = news.query_as_json(news.get_all(num_rows=20))
-        return get_all_res
+        return {'result' : getter.get_articles_of_a_feed(feed_name)}
 
-    @app.route('/api/v1/feeds/<int:uid>', methods=['GET'])
-    def get_one(uid):
-        if news._id_in_table(uid):
-            get_one_res = news.query_as_json(news.get_one(uid))
-            return get_one_res
-        else:
-            return {"message": f"We don't have index {uid}"}, 404
-
-    @app.route('/api/v1/feeds/', methods=['POST'])
-    def add_one():
-        payload = request.json
-        if not payload:
-            return {'message': 'No payload'}, 400
-
-        if 'published' not in payload:
-            return {'message': 'No published field'}, 400
-
-        try:
-            published = arrow.get(payload['published'])
-            payload['published'] = published.datetime
-        except Exception:
-            return {'message': f"Bad 'published' field format {payload['published']}"}, 400
-
-        news.add(payload)
-        return payload
-
-    @app.route('/api/v1/feeds/<int:index>', methods=['DELETE'])
-    def delete_one(index):
-        if news.delete(index):
-            return {"message": f"Successfully deleted index {index}"}, 200
-        return {"message": f"We were not able to delete index {index}"}, 400
-
-    @app.route('/api/v1/feeds/<int:index>', methods=['PUT'])
-    def update_one(index):
-        payload = request.json
-        try:
-            a = arrow.get(payload["published"])
-            payload["published"] = a.datetime
-        except:
-            return {"message": f"Bad 'published' field format {payload['published']}"}, 400
-        if news.update(index, payload):
-            return {"message": f"Successfully updated {index}"}
-        return {"message": f"We were not able to update index {index}"}, 404
 
     return app
 
