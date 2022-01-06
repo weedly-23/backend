@@ -1,6 +1,6 @@
 from typer import Typer
 
-from weedly.db.db import Base, engine
+from weedly.db.session import Base, engine
 
 app = Typer()
 

@@ -3,8 +3,8 @@ import logging
 import time
 from pathlib import Path
 
-from weedly.db.db import db_session
 from weedly.db.models import Article
+from weedly.db.session import db_session
 
 logger = logging.getLogger(__name__)
 

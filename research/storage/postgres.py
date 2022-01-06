@@ -5,7 +5,7 @@ from sqlalchemy import desc, inspect
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.sql import func
 
-from weedly.db.db import db_session
+from weedly.db.session import db_session
 from weedly.db.repos.storage import Storage
 
 

@@ -1,7 +1,7 @@
 '''тут функции для обращения к БД'''
 
 from weedly.db.models import Feed, Article, Author
-from weedly.db.db import db_session
+from weedly.db.session import db_session
 import research.parser.utils as utils
 
 

@@ -13,7 +13,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 
-from weedly.db.db import Base
+from weedly.db.session import Base
 
 db = SQLAlchemy()
 
