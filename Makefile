@@ -16,7 +16,7 @@ db.up:
 
 db.recreate: db.clean db.up
 	@sleep 5
-	@python -m weedly.db.model
+	@python -m weedly.db
 
 db.fake.create:
 	@python -m weedly.tools.fake.create

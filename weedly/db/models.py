@@ -1,3 +1,5 @@
+from typing import Any
+
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import (
     Boolean,
@@ -9,9 +11,9 @@ from sqlalchemy import (
     Table,
     UniqueConstraint,
 )
-from sqlalchemy.orm import RelationshipProperty, relationship
+from sqlalchemy.orm import relationship
 
-from weedly.db.db import Base, engine
+from weedly.db.db import Base
 
 db = SQLAlchemy()
 
@@ -45,7 +47,7 @@ class Feed(Base):
 
     __tablename__ = 'feeds'
 
-    feed_id = Column(Integer, primary_key=True, index=True)
+    feed_id = Column(Integer, primary_key=True)
     feed_name = Column(String, index=True)
     category = Column(String)
     source_url = Column(String, unique=True)
@@ -53,7 +55,9 @@ class Feed(Base):
 
     is_deleted = Column(Boolean, default=False)
 
-    __table_args__ = (UniqueConstraint(feed_name, source_url))
+    __table_args__ = (
+        UniqueConstraint(feed_name, source_url),
+    )
 
     def __repr__(self) -> str:
         return 'Feed: [{uid}] {name}-{url})'.format(
@@ -68,15 +72,13 @@ class Users(Base):
 
     user_id = Column(Integer, primary_key=True, index=True)
     user_name = Column(String, nullable=True)
-    user_feeds: RelationshipProperty[list['Feed']] = relationship(
+    user_feeds: Any = relationship(
         'Feed',
-        secondary=users_n_feeds,
+        secondary='users_n_feeds',
         backref='feed_subs',
     )
 
     is_deleted = Column(Boolean, default=False)
-
-    __table_args__ = {'extend_existing': True}
 
     def __repr__(self) -> str:
         return f'User: [{self.user_id}] {self.user_name}'
@@ -88,8 +90,8 @@ class Author(Base):
     author_name = Column(String, nullable=True)
 
     # TODO: use feed model
-    feed_id = Column(Integer, ForeignKey(Feed.feed_id))
-    feed_name: RelationshipProperty['Feed'] = relationship(
+    feed_id = Column(Integer, ForeignKey('feeds.feed_id'))
+    feed: Any = relationship(
         'Feed',
         foreign_keys=[feed_id],
         backref='feed_authors',
@@ -97,7 +99,9 @@ class Author(Base):
 
     is_deleted = Column(Boolean, default=False)
 
-    __table_args__ = (UniqueConstraint(author_name, feed_id))
+    __table_args__ = (
+        UniqueConstraint(author_name, feed_id),
+    )
 
     def __repr__(self):
         return f'Author: [{self.author_id}] {self.author_name}'
@@ -113,14 +117,14 @@ class Article(Base):
 
     # TODO: use feed model
     feed_id = Column(Integer, ForeignKey(Feed.feed_id))
-    feed_name: RelationshipProperty['Feed'] = relationship(
+    feed: Any = relationship(
         'Feed',
         foreign_keys=[feed_id],
         backref='feed_articles',
     )
 
     author_id = Column(Integer, ForeignKey(Author.author_id), index=True)
-    author_name: RelationshipProperty['Author'] = relationship(
+    author: Any = relationship(
         'Author',
         foreign_keys=[author_id],
         backref='author_articles',
@@ -128,11 +132,9 @@ class Article(Base):
 
     is_deleted = Column(Boolean, default=False, nullable=True)
 
-    __table_args__ = (UniqueConstraint(url, author_id))
+    __table_args__ = (
+        UniqueConstraint(url, author_id),
+    )
 
     def __repr__(self) -> str:
         return f'Article: [{self.article_id}] {self.title}'
-
-
-if __name__ == '__main__':
-    Base.metadata.create_all(bind=engine)
