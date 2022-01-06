@@ -1,8 +1,9 @@
-from sqlalchemy.sql import func
+import json
+from typing import Any, Dict
+
 from sqlalchemy import desc, inspect
 from sqlalchemy.exc import NoResultFound
-from typing import Dict, Any
-import json
+from sqlalchemy.sql import func
 
 from weedly.db.db import db_session
 from weedly.db.repos.storage import Storage
