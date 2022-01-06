@@ -120,17 +120,16 @@ model.feeds with title, rss, category (index)
 model.users -> feeds
 model.articles -> feeds
 
+```http
+POST /api/v1/feeds/
+POST /api/v1/articles/
 
+GET /api/v1/feeds/?title=hacker&category=it
+DELETE /api/v1/articles/{uid}  # is_deleted
+```
 
-#POST /api/v1/feeds/
-#POST /api/v1/articles/
-
-#GET /api/v1/feeds/?title=hacker&category=it
-#DELETE /api/v1/articles/{uid}  # is_deleted
-
-#2 stage:
-#add users with user feeds
-
+2 stage:
+add users with user feeds
 
 3 stage:
 async notifications from my best feeds
@@ -138,9 +137,9 @@ async notifications from my best feeds
 4 stage:
 add media
 
-##Что сделано:
-1. связанные таблицы Feed, Users, Author, Article.
+## Что сделано
+
+1. связанные таблицы `Feed`, `Users`, `Author`, `Article`.
 2. классы для обращения к БД - загрузка (DataLoader) и извлечение (DataGetter)
 в db_funs.py можно наполнить БД данными из тестовых rss-потоков
 3. rss-парсер лежит в utils
-
