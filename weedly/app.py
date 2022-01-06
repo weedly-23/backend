@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 
 from weedly.db import models
+from weedly.views import feeds, users
 
 
 def create_app():
@@ -8,9 +9,8 @@ def create_app():
     app.config.from_pyfile('config.py')
     models.db.init_app(app)
 
-    @app.route('/api/v1/feeds/<feed_name>/authors/', methods=['GET'])
-    def get_feed_authors(feed_name: str):
-        return jsonify([])
+    app.register_blueprint(feeds.routes, url_prefix='/api/v1/feeds/')
+    app.register_blueprint(users.routes, url_prefix='/api/v1/users/')
 
     return app
 
