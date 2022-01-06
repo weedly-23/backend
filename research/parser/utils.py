@@ -78,6 +78,3 @@ def datetime_parser(date):
         return datetime(*date)
     elif type(date) == str:
         return arrow.get(date).datetime
-
-
-
