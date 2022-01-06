@@ -1,5 +1,4 @@
-from weedly import app
-
+from weedly import app, config
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host=config.APP_HOST, port=config.APP_PORT, debug=config.DEBUG)
