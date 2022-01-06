@@ -53,7 +53,7 @@ class Feed(Base):
 
     is_deleted = Column(Boolean, default=False)
 
-    __table_args__ = (UniqueConstraint(feed_name, source_url), {'extend_existing': True})
+    __table_args__ = (UniqueConstraint(feed_name, source_url))
 
     def __repr__(self) -> str:
         return 'Feed: [{uid}] {name}-{url})'.format(
@@ -78,8 +78,8 @@ class Users(Base):
 
     __table_args__ = {'extend_existing': True}
 
-    def __repr__(self):
-        return f'Экземпляр Users: id -- {self.user_id}'
+    def __repr__(self) -> str:
+        return f'User: [{self.user_id}] {self.user_name}'
 
 
 class Author(Base):
@@ -87,6 +87,7 @@ class Author(Base):
     author_id = Column(Integer, primary_key=True)
     author_name = Column(String, nullable=True)
 
+    # TODO: use feed model
     feed_id = Column(Integer, ForeignKey(Feed.feed_id))
     feed_name: RelationshipProperty['Feed'] = relationship(
         'Feed',
@@ -96,10 +97,10 @@ class Author(Base):
 
     is_deleted = Column(Boolean, default=False)
 
-    __table_args__ = (UniqueConstraint(author_name, feed_id), {'extend_existing': True})
+    __table_args__ = (UniqueConstraint(author_name, feed_id))
 
     def __repr__(self):
-        return f'Экземпляр Author: {self.author_name}'
+        return f'Author: [{self.author_id}] {self.author_name}'
 
 
 class Article(Base):
@@ -110,6 +111,7 @@ class Article(Base):
     url = Column(String)
     published = Column(DateTime)
 
+    # TODO: use feed model
     feed_id = Column(Integer, ForeignKey(Feed.feed_id))
     feed_name: RelationshipProperty['Feed'] = relationship(
         'Feed',
@@ -126,10 +128,10 @@ class Article(Base):
 
     is_deleted = Column(Boolean, default=False, nullable=True)
 
-    __table_args__ = (UniqueConstraint(url, author_id), {'extend_existing': True})
+    __table_args__ = (UniqueConstraint(url, author_id))
 
-    def __repr__(self):
-        return f'Экземпляр Article: {self.title}'
+    def __repr__(self) -> str:
+        return f'Article: [{self.article_id}] {self.title}'
 
 
 if __name__ == '__main__':
