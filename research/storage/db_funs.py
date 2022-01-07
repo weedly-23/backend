@@ -1,8 +1,8 @@
 '''тут функции для обращения к БД'''
 
 from weedly.db.models import Feed, Article, Author
-from weedly.db.db import db_session
-import weedly.db.utils as utils
+from weedly.db.session import db_session
+import research.parser.utils as utils
 
 
 class DataGetter:
@@ -164,17 +164,3 @@ class DataLoader:
             db_session.commit()
             print(f'добавили статью {article["title"]} в БД!')
             return f'добавили статью {article["title"]} в БД!'
-
-
-if __name__ == "__main__":
-    '''проходимся по тестовым rss ссылкам и загружаем в БД'''
-
-    test_rss = ['https://meduza.io/rss2/all',
-                "https://www.wired.com/rss/", 'https://vc.ru/rss?ref=vc.ru']
-    loader = DataLoader()
-    for rss in test_rss:
-        data = utils.parse_rss(rss)
-        for article in data:
-            loader.add_article(article)
-
-

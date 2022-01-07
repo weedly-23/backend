@@ -1,22 +1,30 @@
-from flask import Flask, request
+from flask import Flask
+from pydantic import ValidationError
 
 from weedly.db import models
-from weedly.db.db_funs import DataGetter
+from weedly.errors import AppError
+from weedly.views import feeds, users
+
+
+def handle_app_error(error: AppError):
+    return {'error': str(error)}, error.status
+
+
+def handle_validation_error(error: ValidationError):
+    return error.json(indent=2), 400
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
     models.db.init_app(app)
 
-    getter = DataGetter()
-
-    @app.route('/api/v2/feeds/<string:feed_name>/authors/', methods=['GET'])
-    def get_all_authors_of_a_feed(feed_name):
-        '''получить все статьи по названию фида (meduza, wired, vc)'''
-
-        return {'result' : getter.get_articles_of_a_feed(feed_name)}
-
+    app.register_blueprint(feeds.routes, url_prefix='/api/v1/feeds/')
+    app.register_blueprint(users.routes, url_prefix='/api/v1/users/')
+    app.register_error_handler(AppError, handle_app_error)
+    app.register_error_handler(ValidationError, handle_validation_error)
 
     return app
+
 
 app = create_app()

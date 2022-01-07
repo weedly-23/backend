@@ -16,7 +16,7 @@
           "name": "db.create",
           "type": "python",
           "request": "launch",
-          "module": "weedly.db.model",
+          "module": "weedly.db",
           "console": "internalConsole",
           "justMyCode": false,
         },

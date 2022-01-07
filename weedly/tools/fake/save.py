@@ -1,32 +1,35 @@
 import csv
+import logging
 import time
 from pathlib import Path
 
-from weedly.db.db import db_session
-from weedly.db.models import Articles
+from weedly.db.models import Article
+from weedly.db.session import db_session
+
+logger = logging.getLogger(__name__)
 
 
 def from_csv(filepath: Path):
-    with open(filepath, 'r', encoding='utf-8') as f:
+    with open(filepath, 'r', encoding='utf-8') as fs:
         fields = [
-            "title",
-            "author",
-            "url",
-            "source_name",
-            "published"
+            'title',
+            'author',
+            'url',
+            'source_name',
+            'published',
         ]
-        reader = csv.DictReader(f, fields, delimiter=';')
-        return [row for row in reader]
+        reader = csv.DictReader(fs, fields, delimiter=';')
+        return list(reader)
 
 
 def save_data(filepath: Path):
     data = from_csv(filepath)
-    db_session.bulk_insert_mappings(Articles, data)
+    db_session.bulk_insert_mappings(Article, data)
     db_session.commit()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     start = time.time()
     filepath = Path('.data') / 'fake' / 'fakenews.csv'
     save_data(filepath)
-    print(f"Загрузка заняла: {time.time() -  start} секунд.")
+    logger.info('Загрузка заняла: %s секунд.', time.time() - start)

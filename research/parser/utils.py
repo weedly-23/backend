@@ -16,7 +16,7 @@ def parse_rss(url):
     articles = content['entries']
     result = []
     for article in articles:
-        #проверка есть ли автор. если нет - оставляем название источника
+        # проверка есть ли автор. если нет - оставляем название источника
         if 'author' in article.keys():
             author = article['author']
         else:
@@ -78,6 +78,3 @@ def datetime_parser(date):
         return datetime(*date)
     elif type(date) == str:
         return arrow.get(date).datetime
-
-
-

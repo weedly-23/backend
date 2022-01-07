@@ -1,19 +1,34 @@
-from weedly.db.db import Base, engine
-from sqlalchemy import Table, Boolean, Column, Integer, \
-    String, DateTime, ForeignKey, UniqueConstraint
-from sqlalchemy.orm import relationship
+from typing import Any
+
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    Table,
+    UniqueConstraint,
+)
+from sqlalchemy.orm import relationship
+
+from weedly.db.session import Base
 
 db = SQLAlchemy()
 
-'''таблица отношений юзеров и фидов'''
-users_n_feeds = Table('users_n_feeds', Base.metadata,
-                      Column('user_id', Integer, ForeignKey('users.user_id')),
-                      Column('feed_id', Integer, ForeignKey('feeds.feed_id'))
-                      )
+users_n_feeds = Table(
+    'users_n_feeds',
+    Base.metadata,
+    Column('user_id', ForeignKey('users.uid')),
+    Column('feed_id', ForeignKey('feeds.uid')),
+)
+"""таблица отношений юзеров и фидов"""
+
 
 class Feed(Base):
-    '''Класс для источников.
+    """Класс для источников.
+
     Бывает двух видов: rss и НЕ-rss.
     Добавляется в БД через DataLoader.add_rss_feed и .add_not_rss_feed соответственно.
 
@@ -28,76 +43,96 @@ class Feed(Base):
     Feed.feed_authors - все авторы фида
     Feed.feed_articles - все статьи фида
     Feed.feed_subs - все юзеры, подписанные на фид
-    '''
+    """
 
     __tablename__ = 'feeds'
 
-    feed_id = Column(Integer, primary_key=True, index=True)
-    feed_name = Column(String, index=True)
+    uid = Column(Integer, primary_key=True)
+    name = Column(String, index=True)
     category = Column(String)
-    source_url = Column(String, unique=True)
-    is_rss_feed = Column(Boolean)
+    url = Column(String, unique=True)
+    is_rss = Column(Boolean)
 
     is_deleted = Column(Boolean, default=False)
 
-    __table_args__ = (UniqueConstraint(feed_name, source_url), {'extend_existing': True})
+    __table_args__ = (
+        UniqueConstraint(name, url),
+    )
 
-    def __repr__(self):
-        return f'Экземпляр Feed: {self.feed_name}'
+    def __repr__(self) -> str:
+        return 'Feed: [{uid}] {name}-{url})'.format(
+            uid=self.uid,
+            name=self.name,
+            url=self.url,
+        )
 
 
-class Users(Base):
+class User(Base):
     __tablename__ = 'users'
 
-    user_id = Column(Integer, primary_key=True, index=True)
-    user_name = Column(String, nullable=True)
-    user_feeds = relationship('Feed', secondary=users_n_feeds, backref='feed_subs')
+    uid = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=True)
+    feeds: Any = relationship(
+        'Feed',
+        secondary='users_n_feeds',
+        backref='feed_subs',
+    )
 
     is_deleted = Column(Boolean, default=False)
 
-    __table_args__ = {'extend_existing': True}
-
-    def __repr__(self):
-        return f'Экземпляр Users: id -- {self.user_id}'
+    def __repr__(self) -> str:
+        return f'User: [{self.user_id}] {self.user_name}'
 
 
 class Author(Base):
     __tablename__ = 'authors'
-    author_id = Column(Integer, primary_key=True)
-    author_name = Column(String, nullable=True)
+    uid = Column(Integer, primary_key=True)
+    name = Column(String, nullable=True)
 
-    feed_id = Column(Integer, ForeignKey(Feed.feed_id))
-    feed_name = relationship('Feed', foreign_keys=[feed_id], backref='feed_authors')
+    feed_id = Column(Integer, ForeignKey(Feed.uid))
+    feed: Any = relationship(
+        'Feed',
+        foreign_keys=[feed_id],
+        backref='feed_authors',
+    )
 
     is_deleted = Column(Boolean, default=False)
 
-    __table_args__ = (UniqueConstraint(author_name, feed_id), {'extend_existing': True})
+    __table_args__ = (
+        UniqueConstraint(name, feed_id),
+    )
 
     def __repr__(self):
-        return f'Экземпляр Author: {self.author_name}'
+        return f'Author: [{self.author_id}] {self.author_name}'
 
 
 class Article(Base):
-    __tablename__ = "articles"
+    __tablename__ = 'articles'
 
-    article_id = Column(Integer, primary_key=True)
-    title = Column(String)
+    uid = Column(Integer, primary_key=True)
+    name = Column(String)
     url = Column(String)
     published = Column(DateTime)
 
-    feed_id = Column(Integer, ForeignKey(Feed.feed_id))
-    feed_name = relationship('Feed', foreign_keys=[feed_id], backref='feed_articles')
+    feed_id = Column(Integer, ForeignKey(Feed.uid))
+    feed: Any = relationship(
+        'Feed',
+        foreign_keys=[feed_id],
+        backref='feed_articles',
+    )
 
-    author_id = Column(Integer, ForeignKey(Author.author_id), index=True)
-    author_name = relationship('Author', foreign_keys=[author_id], backref='author_articles')
+    author_id = Column(Integer, ForeignKey(Author.uid), index=True)
+    author: Any = relationship(
+        'Author',
+        foreign_keys=[author_id],
+        backref='author_articles',
+    )
 
     is_deleted = Column(Boolean, default=False, nullable=True)
 
-    __table_args__ = (UniqueConstraint(url, author_id), {'extend_existing': True})
+    __table_args__ = (
+        UniqueConstraint(url, author_id),
+    )
 
-    def __repr__(self):
-        return f'Экземпляр Article: {self.title}'
-
-
-if __name__ == '__main__':
-    Base.metadata.create_all(bind=engine)
+    def __repr__(self) -> str:
+        return f'Article: [{self.article_id}] {self.title}'
