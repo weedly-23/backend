@@ -20,8 +20,8 @@ db = SQLAlchemy()
 users_n_feeds = Table(
     'users_n_feeds',
     Base.metadata,
-    Column('user_id', ForeignKey('users.user_id')),
-    Column('feed_id', ForeignKey('feeds.feed_id')),
+    Column('user_id', ForeignKey('users.uid')),
+    Column('feed_id', ForeignKey('feeds.uid')),
 )
 """таблица отношений юзеров и фидов"""
 
@@ -47,32 +47,32 @@ class Feed(Base):
 
     __tablename__ = 'feeds'
 
-    feed_id = Column(Integer, primary_key=True)
-    feed_name = Column(String, index=True)
+    uid = Column(Integer, primary_key=True)
+    name = Column(String, index=True)
     category = Column(String)
-    source_url = Column(String, unique=True)
-    is_rss_feed = Column(Boolean)
+    url = Column(String, unique=True)
+    is_rss = Column(Boolean)
 
     is_deleted = Column(Boolean, default=False)
 
     __table_args__ = (
-        UniqueConstraint(feed_name, source_url),
+        UniqueConstraint(name, url),
     )
 
     def __repr__(self) -> str:
         return 'Feed: [{uid}] {name}-{url})'.format(
-            uid=self.feed_id,
-            name=self.feed_name,
-            url=self.source_url,
+            uid=self.uid,
+            name=self.name,
+            url=self.url,
         )
 
 
 class User(Base):
     __tablename__ = 'users'
 
-    user_id = Column(Integer, primary_key=True, index=True)
-    user_name = Column(String, nullable=True)
-    user_feeds: Any = relationship(
+    uid = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=True)
+    feeds: Any = relationship(
         'Feed',
         secondary='users_n_feeds',
         backref='feed_subs',
@@ -86,11 +86,10 @@ class User(Base):
 
 class Author(Base):
     __tablename__ = 'authors'
-    author_id = Column(Integer, primary_key=True)
-    author_name = Column(String, nullable=True)
+    uid = Column(Integer, primary_key=True)
+    name = Column(String, nullable=True)
 
-    # TODO: use feed model
-    feed_id = Column(Integer, ForeignKey('feeds.feed_id'))
+    feed_id = Column(Integer, ForeignKey(Feed.uid))
     feed: Any = relationship(
         'Feed',
         foreign_keys=[feed_id],
@@ -100,7 +99,7 @@ class Author(Base):
     is_deleted = Column(Boolean, default=False)
 
     __table_args__ = (
-        UniqueConstraint(author_name, feed_id),
+        UniqueConstraint(name, feed_id),
     )
 
     def __repr__(self):
@@ -110,20 +109,19 @@ class Author(Base):
 class Article(Base):
     __tablename__ = 'articles'
 
-    article_id = Column(Integer, primary_key=True)
-    title = Column(String)
+    uid = Column(Integer, primary_key=True)
+    name = Column(String)
     url = Column(String)
     published = Column(DateTime)
 
-    # TODO: use feed model
-    feed_id = Column(Integer, ForeignKey(Feed.feed_id))
+    feed_id = Column(Integer, ForeignKey(Feed.uid))
     feed: Any = relationship(
         'Feed',
         foreign_keys=[feed_id],
         backref='feed_articles',
     )
 
-    author_id = Column(Integer, ForeignKey(Author.author_id), index=True)
+    author_id = Column(Integer, ForeignKey(Author.uid), index=True)
     author: Any = relationship(
         'Author',
         foreign_keys=[author_id],
