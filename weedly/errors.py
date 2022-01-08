@@ -7,6 +7,7 @@ class AppError(Exception):
     def __init__(self, reason: str, status: HTTPStatus) -> None:
         super().__init__(reason)
         self.status = status
+        self.reason = reason
 
 
 class NotFoundError(AppError):
@@ -29,6 +30,3 @@ class AlreadyExistsError(AppError):
             reason=f'{entity} already exists in DB with id {uid}',
             status=self.status,
         )
-#        self.url = url
-
-

@@ -1,12 +1,17 @@
+import logging
+
 from flask import Flask
 from pydantic import ValidationError
 
 from weedly.db import models
 from weedly.errors import AppError
-from weedly.views import feeds, users, authors
+from weedly.views import authors, feeds, users
+
+logger = logging.getLogger(__name__)
 
 
 def handle_app_error(error: AppError):
+    logger.warning(error.reason)
     return {'error': str(error)}, error.status
 
 
@@ -22,7 +27,6 @@ def create_app():
     app.register_blueprint(feeds.routes, url_prefix='/api/v1/feeds/')
     app.register_blueprint(users.routes, url_prefix='/api/v1/users/')
     app.register_blueprint(authors.routes, url_prefix='/api/v1/authors/')
-
 
     app.register_error_handler(AppError, handle_app_error)
     app.register_error_handler(ValidationError, handle_validation_error)
