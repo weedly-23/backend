@@ -31,5 +31,5 @@ def save_data(filepath: Path):
 if __name__ == '__main__':
     start = time.time()
     filepath = Path('.data') / 'fake' / 'fakenews.csv'
-    save_data(filepath)
+ #   save_data(filepath)
     logger.info('Загрузка заняла: %s секунд.', time.time() - start)

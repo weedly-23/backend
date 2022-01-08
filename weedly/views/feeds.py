@@ -1,11 +1,18 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
+from weedly.repos.feeds import FeedRepo
+from weedly.db.session import db_session
+from weedly import schemas
+
 
 routes = Blueprint('feeds', __name__)
 
+repo = FeedRepo(db_session)
 
 @routes.get('/')
 def get_all():
-    return jsonify([]), 200
+    feeds = repo.get_all()
+    feeds = [schemas.Feed.from_orm(e).dict() for e in feeds]
+    return jsonify(feeds), 200
 
 
 @routes.get('/<int:uid>')
@@ -20,7 +27,15 @@ def get_authors(uid: int):
 
 @routes.post('/')
 def add():
-    return {}, 200
+    payload = request.json
+    if not payload:
+        return {'error': 'payload required'}, 400
+    payload['uid'] = 0
+    feed = schemas.Feed(**payload)
+    entity = repo.add(name=feed.name, url=feed.url,
+                      is_rss=feed.is_rss, category=feed.category)
+    new_feed = schemas.Feed.from_orm(entity)
+    return new_feed.dict(), 200
 
 
 @routes.put('/<int:uid>')

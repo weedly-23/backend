@@ -19,3 +19,16 @@ class NotFoundError(AppError):
         )
         self.entity = entity
         self.uid = uid
+
+
+class AlreadyExistsError(AppError):
+    status = HTTPStatus.CONFLICT
+
+    def __init__(self, entity: str, uid: str) -> None:
+        super().__init__(
+            reason=f'{entity} already exists in DB with id {uid}',
+            status=self.status,
+        )
+#        self.url = url
+
+

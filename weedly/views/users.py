@@ -8,7 +8,6 @@ routes = Blueprint('users', __name__)
 
 repo = UserRepo(session=db_session)
 
-
 @routes.get('/')
 def get_all():
     entities = repo.get_all()
@@ -28,8 +27,7 @@ def add():
     payload = request.json
     if not payload:
         return {'error': 'payload required'}, 400
-
-    payload['uid'] = -1
+    payload['uid'] = 0
     user = schemas.User(**payload)
     entity = repo.add(name=user.name)
     new_user = schemas.User.from_orm(entity)
