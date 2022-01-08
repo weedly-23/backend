@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def from_csv(filepath: Path):
     with open(filepath, 'r', encoding='utf-8') as fs:
         fields = [
-            'title',
+            'name',
             'author',
             'url',
             'source_name',
@@ -31,5 +31,5 @@ def save_data(filepath: Path):
 if __name__ == '__main__':
     start = time.time()
     filepath = Path('.data') / 'fake' / 'fakenews.csv'
- #   save_data(filepath)
+    save_data(filepath)
     logger.info('Загрузка заняла: %s секунд.', time.time() - start)
