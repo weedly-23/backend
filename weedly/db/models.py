@@ -81,7 +81,7 @@ class User(Base):
     is_deleted = Column(Boolean, default=False)
 
     def __repr__(self) -> str:
-        return f'User: [{self.user_id}] {self.user_name}'
+        return f'User: [{self.uid}] {self.name}'
 
 
 class Author(Base):
@@ -103,7 +103,7 @@ class Author(Base):
     )
 
     def __repr__(self):
-        return f'Author: [{self.author_id}] {self.author_name}'
+        return f'Author: [{self.uid}] {self.name}'
 
 
 class Article(Base):
@@ -135,4 +135,4 @@ class Article(Base):
     )
 
     def __repr__(self) -> str:
-        return f'Article: [{self.article_id}] {self.title}'
+        return f'Article: [{self.uid}] {self.name}'

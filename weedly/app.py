@@ -3,7 +3,7 @@ from pydantic import ValidationError
 
 from weedly.db import models
 from weedly.errors import AppError
-from weedly.views import feeds, users
+from weedly.views import feeds, users, authors
 
 
 def handle_app_error(error: AppError):
@@ -21,6 +21,9 @@ def create_app():
 
     app.register_blueprint(feeds.routes, url_prefix='/api/v1/feeds/')
     app.register_blueprint(users.routes, url_prefix='/api/v1/users/')
+    app.register_blueprint(authors.routes, url_prefix='/api/v1/authors/')
+
+
     app.register_error_handler(AppError, handle_app_error)
     app.register_error_handler(ValidationError, handle_validation_error)
 
