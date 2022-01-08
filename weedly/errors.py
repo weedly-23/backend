@@ -25,8 +25,10 @@ class NotFoundError(AppError):
 class AlreadyExistsError(AppError):
     status = HTTPStatus.CONFLICT
 
-    def __init__(self, entity: str, uid: str) -> None:
+    def __init__(self, entity: str, constraint: str) -> None:
         super().__init__(
-            reason=f'{entity} already exists in DB with id {uid}',
+            reason=f'{entity}: constraint violation',
             status=self.status,
         )
+        self.entity = entity
+        self.constraint = constraint
