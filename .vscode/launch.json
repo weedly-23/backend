@@ -1,7 +1,4 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -20,21 +17,5 @@
           "console": "internalConsole",
           "justMyCode": false,
         },
-        {
-          "name": "db.fake.create",
-          "type": "python",
-          "request": "launch",
-          "module": "weedly.tools.fake.create",
-          "console": "internalConsole",
-          "justMyCode": false,
-        },
-        {
-          "name": "db.fake.save",
-          "type": "python",
-          "request": "launch",
-          "module": "weedly.tools.fake.save",
-          "console": "internalConsole",
-          "justMyCode": false,
-        }
     ]
 }
