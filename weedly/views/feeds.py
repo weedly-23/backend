@@ -23,7 +23,9 @@ def get_by_id(uid):
 
 @routes.get('/<int:uid>/authors/')
 def get_authors(uid: int):
-    return jsonify([]), 200
+    entities = repo.get_authors(uid)
+    authors = [schemas.Author.from_orm(entity).dict() for entity in entities]
+    return jsonify(authors), 200
 
 
 @routes.post('/')
