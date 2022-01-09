@@ -27,4 +27,4 @@ def add():
     author = schemas.Author(**payload)
     entity = repo.add(name=author.name, feed_id=author.feed_id)
     new_author = schemas.Author.from_orm(entity)
-    return new_author.dict(), 200
+    return new_author.dict(), HTTPStatus.CREATED

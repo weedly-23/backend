@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from flask import Blueprint, jsonify, request
 
 from weedly import schemas
@@ -42,7 +44,7 @@ def add():
         category=feed.category,
     )
     new_feed = schemas.Feed.from_orm(entity)
-    return new_feed.dict(), 200
+    return new_feed.dict(), HTTPStatus.CREATED
 
 
 @routes.put('/<int:uid>')

@@ -2,7 +2,7 @@ import logging
 
 from typer import Typer
 
-from weedly.db.session import Base, engine
+from weedly.db.session import create_db
 
 app = Typer()
 logger = logging.getLogger(__name__)
@@ -11,7 +11,7 @@ logger.setLevel('DEBUG')
 
 @app.command()
 def create():
-    Base.metadata.create_all(bind=engine)
+    create_db()
     logger.warning('Создали базку!')
 
 
