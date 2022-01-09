@@ -1,5 +1,47 @@
 # Бэкэнд с БД на Sqlite
 
+## API методы
+
+Добавить новый feed (пока ручками из апишки):
+
+```bash
+curl --request POST \
+     --url http://localhost:5000/api/v1/feeds/ \
+     --header 'Content-Type: application/json' \
+     --data '{
+            "name": "медуза: IT",
+            "category": "it news",
+            "url": "http://meduza.ru",
+            "is_rss": true
+        }'
+```
+
+Получить список feed для rss parser'а:
+
+```bash
+curl --request GET \
+     --url http://localhost:5000/api/v1/feeds/
+```
+
+Добавить авторов в feed:
+
+```bash
+curl --request POST \
+  --url http://localhost:5000/api/v1/authors/ \
+  --header 'Content-Type: application/json' \
+  --data '{
+        "name": "vladimir 6",
+        "feed_id": 1
+    }'
+```
+
+Получить всех авторов feed:
+
+```bash
+curl --request GET \
+     --url http://localhost:5000/api/v1/feeds/1/authors/
+```
+
 ## Создание БД
 
 Создать пустую локальную БД:
