@@ -13,14 +13,22 @@ repo = FeedRepo(db_session)
 
 @routes.get('/')
 def get_all():
-    entities = repo.get_all()
-    feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
-    return jsonify(feeds), 200
+    args = request.args
+    if args['rss-only'] == '1':
+        entities = repo.get_all_rss()
+        feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
+        return jsonify(feeds), 200
+    elif args['rss-only'] == '0':
+        entities = repo.get_all()
+        feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
+        return jsonify(feeds), 200
 
 
 @routes.get('/<int:uid>')
 def get_by_id(uid):
-    return {}, 200
+    feed = repo.get_by_id(uid)
+    feed = schemas.Feed.from_orm(feed).json()
+    return feed, 200
 
 
 @routes.get('/<int:uid>/authors/')
@@ -28,6 +36,13 @@ def get_authors(uid: int):
     entities = repo.get_authors(uid)
     authors = [schemas.Author.from_orm(entity).dict() for entity in entities]
     return jsonify(authors), 200
+
+
+@routes.get('/<int:uid>/articles/')
+def get_articles(uid):
+    entities = repo.get_articles(uid)
+    articles = [schemas.Article.from_orm(article).dict() for article in entities]
+    return jsonify(articles), 200
 
 
 @routes.post('/')
@@ -47,11 +62,19 @@ def add():
     return new_feed.dict(), HTTPStatus.CREATED
 
 
-@routes.put('/<int:uid>')
-def update(uid: int):
-    return {}, 200
+@routes.put('/')
+def update():
+    payload = request.json
+    if not payload:
+        return {'error': 'payload required'}, 400
+    feed = schemas.Feed(**payload).dict()
+    entity = repo.update(**feed)
+    updated_feed = schemas.Feed.from_orm(entity).dict()
+
+    return jsonify(updated_feed), 200
 
 
 @routes.delete('/<int:uid>')
 def delete(uid: int):
-    return {}, 204
+    if repo.delete(uid):
+        return '', 204

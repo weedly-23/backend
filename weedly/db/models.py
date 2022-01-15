@@ -13,7 +13,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 
-from weedly.db.session import Base
+from weedly.db.session import Base, engine
 
 db = SQLAlchemy()
 
@@ -71,7 +71,7 @@ class User(Base):
     __tablename__ = 'users'
 
     uid = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=True)
+    name = Column(String)
     feeds: Any = relationship(
         'Feed',
         secondary='users_n_feeds',
@@ -87,7 +87,7 @@ class User(Base):
 class Author(Base):
     __tablename__ = 'authors'
     uid = Column(Integer, primary_key=True)
-    name = Column(String, nullable=True)
+    name = Column(String)
 
     feed_id = Column(Integer, ForeignKey(Feed.uid))
     feed: Any = relationship(
@@ -110,10 +110,10 @@ class Article(Base):
     __tablename__ = 'articles'
 
     uid = Column(Integer, primary_key=True)
-    name = Column(String)
+    title = Column(String)
     url = Column(String)
     published = Column(DateTime)
-
+    description = Column(String)
     feed_id = Column(Integer, ForeignKey(Feed.uid))
     feed: Any = relationship(
         'Feed',
@@ -128,11 +128,14 @@ class Article(Base):
         backref='author_articles',
     )
 
-    is_deleted = Column(Boolean, default=False, nullable=True)
+    is_deleted = Column(Boolean, default=False)
 
     __table_args__ = (
         UniqueConstraint(url, author_id),
     )
 
     def __repr__(self) -> str:
-        return f'Article: [{self.uid}] {self.name}'
+        return f'Article: [{self.uid}] {self.title}'
+
+
+

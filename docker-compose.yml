@@ -19,4 +19,4 @@ services:
       - weedly-backend
 
 networks:
-  weedly-backend:
+  weedly-backend: null
