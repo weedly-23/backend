@@ -11,11 +11,6 @@ routes = Blueprint('authors', __name__)
 repo = AuthorRepo(db_session)
 
 
-@routes.get('/')
-def get_all():
-    return jsonify([]), 200
-
-
 @routes.post('/')
 def add():
     payload = request.json
@@ -28,3 +23,20 @@ def add():
     entity = repo.add(name=author.name, feed_id=author.feed_id)
     new_author = schemas.Author.from_orm(entity)
     return new_author.dict(), HTTPStatus.CREATED
+
+
+@routes.get('/<int:uid>')
+def get_by_id(uid):
+    entity = repo.get_by_id(uid)
+    author = schemas.Author.from_orm(entity)
+    return author.dict(), 200
+
+
+@routes.get('<int:uid>/articles/')
+def get_all_articles_of_author(uid):
+    entities = repo.get_all_author_articles(uid)
+    articles = [schemas.Article.from_orm(article).dict() for article in entities]
+    return jsonify(articles), 200
+
+
+

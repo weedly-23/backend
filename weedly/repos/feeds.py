@@ -42,6 +42,12 @@ class FeedRepo:
         query = query.limit(limit).offset(offset)
         return query.all()
 
+    def get_all_rss(self, limit: int = 100, offset=0) -> list[Feed]:
+        query = self.session.query(Feed)
+        query = query.filter_by(is_deleted=False, is_rss=True)
+        query = query.limit(limit).offset(offset)
+        return query.all()
+
     def update(self, uid: int, name: str, category: str, url: str, is_rss: bool) -> Feed:
         feed = self.get_by_id(uid)
 
@@ -55,16 +61,20 @@ class FeedRepo:
         logger.debug('обновили данные для %S', feed)
         return feed
 
-    def delete(self, uid: int) -> None:
+    def delete(self, uid: int):
         query = self.session.query(Feed)
         query = query.filter_by(uid=uid)
         feed = query.first()
         if not feed:
             raise NotFoundError('feed', uid)
 
+        if feed.is_deleted:
+            raise AlreadyExistsError('feed', str(uid))
+
         feed.is_deleted = True
         self.session.commit()
         logger.debug('удалили Feed %S', feed)
+        return True
 
     def get_authors(self, uid) -> list[Author]:
         feed = self.get_by_id(uid)

@@ -1,9 +1,9 @@
 {
     "python.linting.mypyEnabled": true,
     "python.linting.flake8Enabled": true,
-
-    "editor.rulers": [99],
-
+    "editor.rulers": [
+        99
+    ],
     "search.exclude": {
         "# my stuff": true,
         "weedly.db": true,
@@ -223,5 +223,6 @@
         ".pyre/": true,
         "#pycharm": true,
         ".idea": true
-    }
+    },
+    "python.linting.enabled": true
 }
