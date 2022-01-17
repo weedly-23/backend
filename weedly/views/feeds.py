@@ -31,9 +31,15 @@ def get_by_id(uid):
     return feed, 200
 
 
+@routes.get('/source-name/<string:name>')
+def get_by_source_name(name):
+    entities = repo.get_authors_by_name(name)
+    authors = [schemas.Author.from_orm(entity).dict() for entity in entities]
+    return jsonify(authors)
+
 @routes.get('/<int:uid>/authors/')
 def get_authors(uid: int):
-    entities = repo.get_authors(uid)
+    entities = repo.get_authors_by_id(uid)
     authors = [schemas.Author.from_orm(entity).dict() for entity in entities]
     return jsonify(authors), 200
 
