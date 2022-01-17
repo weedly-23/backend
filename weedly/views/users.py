@@ -36,8 +36,8 @@ def add():
     return new_user.dict(), 200
 
 
-@routes.put('/')
-def update():
+@routes.put('/<int:uid>')
+def update(uid: int):
     payload = request.json
     if not payload:
         return {'error': 'payload required'}, 400

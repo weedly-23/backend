@@ -82,5 +82,5 @@ def update():
 
 @routes.delete('/<int:uid>')
 def delete(uid: int):
-    if repo.delete(uid):
-        return '', 204
+    repo.delete(uid)
+    return '', 204

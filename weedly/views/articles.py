@@ -11,13 +11,18 @@ routes = Blueprint('articles', __name__)
 repo = ArticleRepo(db_session)
 
 
-@routes.get('/<string:sminame>')
-def get_all(sminame=''):
+@routes.get('/')
+def get_all():
     entities = repo.get_all()
-    if sminame:
-        entities = [e for e in entities if sminame in e['url']]
-    return jsonify(entities)
+    articles = [schemas.Article.from_orm(ent).dict() for ent in entities]
+    return jsonify(articles), 200
 
+
+@routes.get('/<string:feed_name>')
+def get_all_by_feed_name(feed_name):
+    entities = repo.get_by_feed_name(feed_name)[0]
+    articles = [schemas.Article.from_orm(ent).dict() for ent in entities]
+    return jsonify(articles), 200
 
 
 @routes.post('/')
@@ -33,4 +38,5 @@ def add():
                       feed_id=article.feed_id, author_id=article.author_id)
     new_article = schemas.Article.from_orm(entity)
     new_article.published = arrow.get(new_article.published).for_json()
+
     return new_article.dict(), HTTPStatus.CREATED
