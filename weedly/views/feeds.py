@@ -37,6 +37,7 @@ def get_by_source_name(name):
     authors = [schemas.Author.from_orm(entity).dict() for entity in entities]
     return jsonify(authors)
 
+
 @routes.get('/<int:uid>/authors/')
 def get_authors(uid: int):
     entities = repo.get_authors_by_id(uid)

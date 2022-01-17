@@ -42,13 +42,6 @@ class FeedRepo:
         query = query.limit(limit).offset(offset)
         return query.all()
 
-    def ids_by_name(self, name):
-        query = self.session.query(Feed)
-        query = query.filter_by(is_deleted=False)
-        query = query.filter_by(Feed.name.contains(name))
-        return query.all()
-
-
     def get_all_rss(self, limit: int = 100, offset=0) -> list[Feed]:
         query = self.session.query(Feed)
         query = query.filter_by(is_deleted=False, is_rss=True)
@@ -82,14 +75,12 @@ class FeedRepo:
         self.session.commit()
         logger.debug('удалили Feed %S', feed)
 
-
     def get_authors_by_id(self, uid) -> list[Author]:
         feed = self.get_by_id(uid)
         return feed.feed_authors
 
     def get_authors_by_name(self, name):
         name = name.replace('-', '.')
-        print(name)
         query = self.session.query(Feed)
         query = query.filter_by(is_deleted=False)
         query = query.filter(Feed.name.contains(name)).all()
@@ -98,12 +89,6 @@ class FeedRepo:
 
         return [e.feed_authors for e in query][0]
 
-
     def get_articles(self, uid) -> list[Article]:
         feed = self.get_by_id(uid)
         return feed.feed_articles
-
-if __name__ == '__main__':
-    from weedly.db.session import db_session
-    repo = FeedRepo(db_session)
-    print(repo.get_authors_by_name('vc-ru'))
