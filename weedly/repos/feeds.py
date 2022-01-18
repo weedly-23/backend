@@ -61,7 +61,7 @@ class FeedRepo:
         logger.debug('обновили данные для %S', feed)
         return feed
 
-    def delete(self, uid: int):
+    def delete(self, uid: int) -> None:
         query = self.session.query(Feed)
         query = query.filter_by(uid=uid)
         feed = query.first()
@@ -74,11 +74,20 @@ class FeedRepo:
         feed.is_deleted = True
         self.session.commit()
         logger.debug('удалили Feed %S', feed)
-        return True
 
-    def get_authors(self, uid) -> list[Author]:
+    def get_authors_by_id(self, uid) -> list[Author]:
         feed = self.get_by_id(uid)
         return feed.feed_authors
+
+    def get_authors_by_name(self, name):
+        name = name.replace('-', '.')
+        query = self.session.query(Feed)
+        query = query.filter_by(is_deleted=False)
+        query = query.filter(Feed.name.contains(name)).all()
+        if not query:
+            raise NotFoundError('feed', name)
+
+        return [e.feed_authors for e in query][0]
 
     def get_articles(self, uid) -> list[Article]:
         feed = self.get_by_id(uid)

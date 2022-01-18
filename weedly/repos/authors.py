@@ -3,7 +3,7 @@ import logging
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from weedly.db.models import Author, Article
+from weedly.db.models import Author, Article, Feed
 from weedly.errors import AlreadyExistsError, NotFoundError
 
 logger = logging.getLogger(__name__)
@@ -42,8 +42,19 @@ class AuthorRepo:
         query = query.filter_by(uid=uid)
         query = query.filter_by(is_deleted=False)
         articles = query.first().author_articles
+
         if not articles:
             raise NotFoundError('articles', uid)
 
         return articles
 
+    def get_author_feed(self, uid) -> Feed:
+        query = self.session.query(Author)
+        query = query.filter_by(uid=uid)
+        query = query.filter_by(is_deleted=False)
+        feed = query.first().feed
+
+        if not feed:
+            raise NotFoundError('author', uid)
+
+        return feed

@@ -136,6 +136,3 @@ class Article(Base):
 
     def __repr__(self) -> str:
         return f'Article: [{self.uid}] {self.title}'
-
-
-

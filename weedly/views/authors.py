@@ -25,11 +25,18 @@ def add():
     return new_author.dict(), HTTPStatus.CREATED
 
 
+
 @routes.get('/<int:uid>')
 def get_by_id(uid):
     entity = repo.get_by_id(uid)
     author = schemas.Author.from_orm(entity)
     return author.dict(), 200
+
+@routes.get('/<int:uid>/feed')
+def get_author_feed(uid):
+    entity = repo.get_author_feed(uid)
+    feed = schemas.Feed.from_orm(entity)
+    return feed.dict(), 200
 
 
 @routes.get('<int:uid>/articles/')
@@ -37,6 +44,8 @@ def get_all_articles_of_author(uid):
     entities = repo.get_all_author_articles(uid)
     articles = [schemas.Article.from_orm(article).dict() for article in entities]
     return jsonify(articles), 200
+
+
 
 
 
