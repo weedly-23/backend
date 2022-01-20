@@ -14,21 +14,23 @@ repo = FeedRepo(db_session)
 @routes.get('/')
 def get_all():
     args = request.args
-    if args['rss-only'] == '1':
+    rss_only = bool(int(args.get('rss-only', '0')))
+
+    if rss_only:
         entities = repo.get_all_rss()
         feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
         return jsonify(feeds), 200
-    elif args['rss-only'] == '0':
-        entities = repo.get_all()
-        feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
-        return jsonify(feeds), 200
+
+    entities = repo.get_all()
+    feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
+    return jsonify(feeds), 200
 
 
 @routes.get('/<int:uid>')
 def get_by_id(uid):
     feed = repo.get_by_id(uid)
-    feed = schemas.Feed.from_orm(feed).json()
-    return feed, 200
+    data = schemas.Feed.from_orm(feed).json()
+    return data, 200
 
 
 @routes.get('/source-name/<string:name>')
