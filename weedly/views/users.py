@@ -29,23 +29,31 @@ def add():
     if not payload:
         return {'error': 'payload required'}, 400
 
-    payload['uid'] = 0
     user = schemas.User(**payload)
-    entity = repo.add(name=user.name)
+    entity = repo.add(name=user.name, uid=user.uid, feed_id=user.feed_id)
     new_user = schemas.User.from_orm(entity)
     return new_user.dict(), 200
 
 
 @routes.put('/<int:uid>')
 def update(uid: int):
+    """в том числе добавить rss"""
+
     payload = request.json
     if not payload:
         return {'error': 'payload required'}, 400
 
+    print('вошли в view update ---', payload)
     user = schemas.User(**payload)
-    entity = repo.update(uid=user.uid, name=user.name)
+    entity = repo.update(uid=user.uid, name=user.name, feed_id=user.feed_id)
     updated_user = schemas.User.from_orm(entity)
     return updated_user.dict(), 200
+
+
+@routes.delete('/<int:uid>/<int:feed_id>')
+def delete_rss(uid, feed_id):
+    repo.delete_rss_from_subs(uid, feed_id)
+    return f'Удалили {feed_id}', 204
 
 
 @routes.delete('/<int:uid>')

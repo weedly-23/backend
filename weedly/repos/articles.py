@@ -22,7 +22,6 @@ class ArticleRepo:
         try:
             article = Article(title=title, url=url, published=published,
                               feed_id=feed_id, author_id=author_id)
-            print(article)
             self.session.add(article)
             self.session.commit()
             return article
@@ -52,12 +51,12 @@ class ArticleRepo:
 
         return articles
 
-    def get_all(self, limit: int = 100, offset=0) -> list[dict[str, str]]:
+    def get_all(self, limit: int = 100, offset=0) -> list[Article]:
         query = self.session.query(Article)
         query = query.filter_by(is_deleted=False)
         query = query.limit(limit).offset(offset)
-        query = query.all()
-        return query
+        articles = query.all()
+        return articles
 
     def update(self, uid: int, title: str, url: str, published: datetime) -> Article:
         query = self.session.query(Article)

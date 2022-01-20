@@ -81,6 +81,19 @@ def update():
     return jsonify(updated_feed), 200
 
 
+@routes.put('/get-by-url/')
+def get_by_url():
+    payload = request.json
+    if not payload:
+        return {'error': 'payload required'}, 400
+
+    url = payload['url']
+    entity = repo.get_by_url(url)
+    feed = schemas.Feed.from_orm(entity).dict()
+
+    return jsonify(feed), 200
+
+
 @routes.delete('/<int:uid>')
 def delete(uid: int):
     repo.delete(uid)

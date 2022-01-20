@@ -28,7 +28,7 @@ class AlreadyExistsError(AppError):
     def __init__(self, entity: str, constraint: str) -> None:
         super().__init__(
             reason=f'{entity}: constraint violation',
-            status=self.status,
+            status=self.status
         )
         self.entity = entity
         self.constraint = constraint

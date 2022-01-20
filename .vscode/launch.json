@@ -1,21 +1,35 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "api",
-            "type": "python",
-            "request": "launch",
-            "module": "weedly",
-            "console": "internalConsole",
-            "justMyCode": false,
-        },
-        {
-          "name": "db.create",
-          "type": "python",
-          "request": "launch",
-          "module": "weedly.db",
-          "console": "internalConsole",
-          "justMyCode": false,
-        },
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "api",
+      "type": "python",
+      "request": "launch",
+      "module": "weedly",
+      "console": "internalConsole",
+      "justMyCode": false,
+    },
+    {
+      "name": "db.create",
+      "type": "python",
+      "request": "launch",
+      "module": "weedly.db",
+      "console": "internalConsole",
+      "justMyCode": false,
+      "args": [
+        "create"
+      ]
+    },
+    {
+      "name": "test",
+      "type": "python",
+      "request": "launch",
+      "module": "weedly.repos.users",
+      "console": "internalConsole",
+      "justMyCode": false,
+      "args": [
+        "add-test-rss"
+      ]
+    },
+  ]
 }
