@@ -22,7 +22,6 @@ class Feed(Model):
 class User(Model):
     name: Optional[str]
     uid: int
-    feed_id: Optional[int]
 
 
 class Author(Model):

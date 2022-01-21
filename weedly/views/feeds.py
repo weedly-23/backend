@@ -81,7 +81,7 @@ def update():
     return jsonify(updated_feed), 200
 
 
-@routes.put('/get-by-url/')
+@routes.post('/get-by-url/')
 def get_by_url():
     payload = request.json
     if not payload:

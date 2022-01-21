@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 
+
 from weedly import schemas
 from weedly.db.session import db_session
 from weedly.repos.users import UserRepo
@@ -30,30 +31,39 @@ def add():
         return {'error': 'payload required'}, 400
 
     user = schemas.User(**payload)
-    entity = repo.add(name=user.name, uid=user.uid, feed_id=user.feed_id)
+    entity = repo.add(name=user.name, uid=user.uid)
     new_user = schemas.User.from_orm(entity)
     return new_user.dict(), 200
 
 
-@routes.put('/<int:uid>')
-def update(uid: int):
-    """в том числе добавить rss"""
+@routes.post('/<int:uid>/feeds/')
+def add_rss_to_user(uid: int):
 
     payload = request.json
     if not payload:
         return {'error': 'payload required'}, 400
 
-    print('вошли в view update ---', payload)
-    user = schemas.User(**payload)
-    entity = repo.update(uid=user.uid, name=user.name, feed_id=user.feed_id)
-    updated_user = schemas.User.from_orm(entity)
-    return updated_user.dict(), 200
+    feed_id = payload['feed_id']
+
+    updated_feeds = repo.add_rss_to_user(uid=uid, feed_id=feed_id)
+    return {"updated_feeds": updated_feeds}, 200
 
 
-@routes.delete('/<int:uid>/<int:feed_id>')
+@routes.delete('/<int:uid>/feeds/<int:feed_id>')
 def delete_rss(uid, feed_id):
     repo.delete_rss_from_subs(uid, feed_id)
     return f'Удалили {feed_id}', 204
+
+
+@routes.get('/<int:uid>/feeds')
+def get_user_feeds(uid: int):
+    entities = repo.get_user_rss(uid)
+
+    if entities:
+        feeds = [schemas.Feed.from_orm(e).dict() for e in entities]
+        return jsonify(feeds), 200
+
+    return 'No feeds', 204
 
 
 @routes.delete('/<int:uid>')

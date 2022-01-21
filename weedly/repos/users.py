@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union
 
 from sqlalchemy.orm import Session
 
@@ -11,7 +11,7 @@ class UserRepo:
     def __init__(self, session: Session) -> None:
         self.session = session
 
-    def add(self, uid: int, feed_id: Optional[int], name: Optional[str]) -> User:
+    def add(self, uid: int, name: Optional[str]) -> User:
         deleted_user = self.session.query(User).filter_by(uid=uid, is_deleted=True).first()
         if deleted_user:
             deleted_user.is_deleted = False
@@ -59,7 +59,19 @@ class UserRepo:
         self.session.commit()
         return user
 
-    def delete_rss_from_subs(self, uid, feed_id):
+    def add_rss_to_user(self, uid: int, feed_id: int) -> list[Feed]:
+        query = self.session.query(User)
+        query = query.filter_by(uid=uid)
+        query = query.filter_by(is_deleted=False)
+        user = query.first()
+
+        feed = self.session.query(Feed).filter_by(uid=feed_id, is_deleted=False).first()
+        user.feeds.append(feed)
+
+        self.session.commit()
+        return [e.name for e in user.feeds]
+
+    def delete_rss_from_subs(self, uid: int, feed_id: int):
         query = self.session.query(User)
         query = query.filter_by(uid=uid)
         query = query.filter_by(is_deleted=False)
@@ -72,6 +84,17 @@ class UserRepo:
         self.session.commit()
 
         return user.feeds
+
+    def get_user_rss(self, uid) -> Union[list[Feed], None]:
+        query = self.session.query(User)
+        query = query.filter_by(uid=uid)
+        query = query.filter_by(is_deleted=False)
+        user = query.first()
+        if not user:
+            raise NotFoundError('user', uid)
+
+        user_feeds = user.feeds
+        return user_feeds
 
     def delete(self, uid: int) -> None:
         query = self.session.query(User)
