@@ -1,4 +1,5 @@
 import logging
+from typing import Optional
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -14,14 +15,16 @@ class FeedRepo:
     def __init__(self, session: Session) -> None:
         self.session = session
 
-    def add(self, name: str, url: str, is_rss: bool, category: str) -> Feed:
+    def add(self, name: str, url: str, is_rss: bool, category: Optional[str]) -> Feed:
         feed = Feed(name=name, url=url, is_rss=is_rss, category=category)
 
         try:
             self.session.add(feed)
             self.session.commit()
+
         except IntegrityError as err:
-            raise AlreadyExistsError(entity='feeds', constraint=str(err))
+            raise AlreadyExistsError(entity='feeds',
+                                     constraint=str(err))
 
         logger.debug('Feed %s добавлен в БД', url)
         return feed
@@ -33,6 +36,16 @@ class FeedRepo:
         feed = query.first()
         if not feed:
             raise NotFoundError('feed', uid)
+
+        return feed
+
+    def get_by_url(self, url) -> Feed:
+        query = self.session.query(Feed)
+        query = query.filter_by(url=url)
+        query = query.filter_by(is_deleted=False)
+        feed = query.first()
+        if not feed:
+            raise NotFoundError('feed', url)
 
         return feed
 

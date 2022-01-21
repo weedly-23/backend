@@ -14,13 +14,14 @@ class Model(BaseModel):
 
 class Feed(Model):
     name: str
-    category: str
+    category: Optional[str]
     url: AnyUrl
     is_rss: bool
 
 
 class User(Model):
-    name: str
+    name: Optional[str]
+    uid: int
 
 
 class Author(Model):
