@@ -12,7 +12,6 @@ RUN pip install poetry
 COPY pyproject.toml poetry.lock /app/
 RUN poetry install --no-dev
 
-COPY data /app/data
 COPY weedly /app/weedly
 
 CMD [ "poetry", "run", "python", "-m", "weedly"]
