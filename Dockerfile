@@ -14,4 +14,4 @@ RUN poetry install --no-dev
 
 COPY weedly /app/weedly
 
-CMD [ "poetry", "run", "python", "-m", "weedly"]
+CMD [ "gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "weedly.app:app"]
