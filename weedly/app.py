@@ -4,12 +4,11 @@ from flask import Flask
 from pydantic import ValidationError
 from werkzeug.exceptions import HTTPException
 
-from weedly.db import models
+from weedly.db import models, session
 from weedly.errors import AppError
-from weedly.views import authors, feeds, users, articles
+from weedly.views import articles, authors, feeds, users
 
 logger = logging.getLogger(__name__)
-
 
 def handle_app_error(error: AppError):
     logger.warning(error.reason)
@@ -25,6 +24,10 @@ def handle_validation_error(error: ValidationError):
     return error.json(indent=2), 400
 
 
+def shutdown_session(exception=None):
+    session.db_session.remove()
+
+
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
@@ -38,6 +41,8 @@ def create_app():
     app.register_error_handler(HTTPException, handle_http_error)
     app.register_error_handler(AppError, handle_app_error)
     app.register_error_handler(ValidationError, handle_validation_error)
+
+    app.teardown_appcontext(shutdown_session)
 
     return app
 

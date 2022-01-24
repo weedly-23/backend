@@ -30,4 +30,4 @@ db.clean:
 
 
 run:
-	@python -m weedly
+	@gunicorn -w 4 -b 0.0.0.0:5000 weedly.app:app
