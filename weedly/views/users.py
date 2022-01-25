@@ -46,13 +46,18 @@ def add_rss_to_user(uid: int):
     feed_id = payload['feed_id']
 
     updated_feeds = repo.add_rss_to_user(uid=uid, feed_id=feed_id)
-    return {"updated_feeds": updated_feeds}, 200
+    if updated_feeds:
+        return {"updated_feeds": updated_feeds}, 200
+    return {"error": "не получилось добавить rss"}, 404
 
 
-@routes.delete('/<int:uid>/feeds/<int:feed_id>')
+@routes.post('/<int:uid>/feeds/<int:feed_id>')
 def delete_rss(uid, feed_id):
-    repo.delete_rss_from_subs(uid, feed_id)
-    return f'Удалили {feed_id}', 204
+    entities = repo.delete_rss_from_subs(uid, feed_id)
+    if entities:
+        updated_user_feeds = [schemas.Feed.from_orm(e).dict() for e in entities]
+        return jsonify(updated_user_feeds), 200
+    return '0 Feeds', 200
 
 
 @routes.get('/<int:uid>/feeds')
@@ -63,7 +68,7 @@ def get_user_feeds(uid: int):
         feeds = [schemas.Feed.from_orm(e).dict() for e in entities]
         return jsonify(feeds), 200
 
-    return 'No feeds', 204
+    return {'error': 'No user feeds'}, 404
 
 
 @routes.delete('/<int:uid>')

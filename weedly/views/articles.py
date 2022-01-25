@@ -36,7 +36,7 @@ def add():
     article = schemas.Article(**payload)
     entity = repo.add(title=article.title, url=article.url, published=article.published,
                       feed_id=article.feed_id, author_id=article.author_id)
-    new_article = schemas.Article.from_orm(entity)
-    new_article.published = arrow.get(new_article.published).for_json()
+    new_article = schemas.Article.from_orm(entity).dict()
+    new_article['published'] = arrow.get(new_article['published']).for_json()
 
-    return new_article.dict(), HTTPStatus.CREATED
+    return new_article, HTTPStatus.CREATED

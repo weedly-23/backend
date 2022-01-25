@@ -59,11 +59,14 @@ class UserRepo:
         self.session.commit()
         return user
 
-    def add_rss_to_user(self, uid: int, feed_id: int) -> list[Feed]:
+    def add_rss_to_user(self, uid: int, feed_id: int) -> Optional[list[Feed]]:
         query = self.session.query(User)
         query = query.filter_by(uid=uid)
         query = query.filter_by(is_deleted=False)
         user = query.first()
+
+        if not user:
+            raise NotFoundError('user', uid)
 
         feed = self.session.query(Feed).filter_by(uid=feed_id, is_deleted=False).first()
         user.feeds.append(feed)
@@ -71,7 +74,7 @@ class UserRepo:
         self.session.commit()
         return [e.name for e in user.feeds]
 
-    def delete_rss_from_subs(self, uid: int, feed_id: int):
+    def delete_rss_from_subs(self, uid: int, feed_id: int) -> list[Feed]:
         query = self.session.query(User)
         query = query.filter_by(uid=uid)
         query = query.filter_by(is_deleted=False)
@@ -80,9 +83,11 @@ class UserRepo:
             raise NotFoundError('user', uid)
 
         updated_feeds = [feed for feed in user.feeds if feed.uid != feed_id]
+        if user.feeds == updated_feeds:
+            raise NotFoundError('юзер не подписан на этот фид', uid)
+
         user.feeds = updated_feeds
         self.session.commit()
-
         return user.feeds
 
     def get_user_rss(self, uid) -> Union[list[Feed], None]:
