@@ -1,3 +1,4 @@
+from charset_normalizer import logging
 from flask import Blueprint, jsonify, request
 
 
@@ -12,9 +13,14 @@ repo = UserRepo(session=db_session)
 
 @routes.get('/')
 def get_all():
-    entities = repo.get_all()
-    users = [schemas.User.from_orm(entity).dict() for entity in entities]
-    return jsonify(users), 200
+    try:
+        print('--- получили запрос на юзеров ---')
+        entities = repo.get_all()
+        users = [schemas.User.from_orm(entity).dict() for entity in entities]
+        logging.debug('users----%s', users)
+        return jsonify(users), 200
+    except Exception as ex:
+        return {"error": ex}, 404
 
 
 @routes.get('/<int:uid>')
@@ -48,10 +54,10 @@ def add_rss_to_user(uid: int):
     updated_feeds = repo.add_rss_to_user(uid=uid, feed_id=feed_id)
     if updated_feeds:
         return {"updated_feeds": updated_feeds}, 200
-    return {"error": "не получилось добавить rss"}, 404
+    return "не получилось добавить rss", 404
 
 
-@routes.post('/<int:uid>/feeds/<int:feed_id>')
+@routes.put('/<int:uid>/feeds/<int:feed_id>')
 def delete_rss(uid, feed_id):
     entities = repo.delete_rss_from_subs(uid, feed_id)
     if entities:
@@ -68,7 +74,22 @@ def get_user_feeds(uid: int):
         feeds = [schemas.Feed.from_orm(e).dict() for e in entities]
         return jsonify(feeds), 200
 
-    return {'error': 'No user feeds'}, 404
+    return 'No user feeds', 404
+
+
+@routes.get('/<int:uid>/articles/')
+def get_user_artcles(uid: int):
+    args = request.args
+    not_notificated_only = bool(int(args.get('not-notificated-only', '0')))
+
+    if not_notificated_only:
+        entities = repo.get_not_notificated_articles(uid)
+
+        if entities:
+            articles = [schemas.Article.from_orm(article).dict() for article in entities]
+            return jsonify(articles), 200
+
+        return 'no new articles', 404
 
 
 @routes.delete('/<int:uid>')

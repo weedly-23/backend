@@ -2,7 +2,7 @@ from typing import Optional, Union
 
 from sqlalchemy.orm import Session
 
-from weedly.db.models import User, Feed
+from weedly.db.models import Article, User, Feed
 from weedly.errors import NotFoundError
 
 
@@ -100,6 +100,26 @@ class UserRepo:
 
         user_feeds = user.feeds
         return user_feeds
+
+    def get_not_notificated_articles(self, user_id) -> Union[list[Article], None]:
+        query = self.session.query(User)
+        query = query.filter_by(uid=user_id)
+        query = query.filter_by(is_deleted=False)
+        user = query.first()
+        if not user:
+            raise NotFoundError('user', user_id)
+
+        all_not_notificated_articles = []
+
+        for feed in user.feeds:
+            for article in feed.feed_articles:
+                notificated_users = [user.uid for user in article.notificated_users]
+                if user_id not in notificated_users:
+                    all_not_notificated_articles.append(article)
+                    article.notificated_users.append(user)
+                    self.session.commit()
+
+        return all_not_notificated_articles
 
     def delete(self, uid: int) -> None:
         query = self.session.query(User)

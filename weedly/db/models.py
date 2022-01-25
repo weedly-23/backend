@@ -23,7 +23,14 @@ users_n_feeds = Table(
     Column('user_id', ForeignKey('users.uid')),
     Column('feed_id', ForeignKey('feeds.uid')),
 )
-"""таблица отношений юзеров и фидов"""
+
+
+users_n_articles_notifications = Table(
+    'users_n_articles_notifications',
+    Base.metadata,
+    Column('user_id', ForeignKey('users.uid')),
+    Column('article_id', ForeignKey('articles.uid')),
+)
 
 
 class Feed(Base):
@@ -126,6 +133,12 @@ class Article(Base):
         'Author',
         foreign_keys=[author_id],
         backref='author_articles',
+    )
+
+    notificated_users: Any = relationship(
+        'User',
+        secondary='users_n_articles_notifications',
+        backref='receivied_articles',
     )
 
     is_deleted = Column(Boolean, default=False)
