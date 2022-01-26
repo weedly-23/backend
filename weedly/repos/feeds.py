@@ -23,8 +23,10 @@ class FeedRepo:
             self.session.commit()
 
         except IntegrityError as err:
-            raise AlreadyExistsError(entity='feeds',
-                                     constraint=str(err))
+            raise AlreadyExistsError(
+                entity='feeds',
+                constraint=str(err),
+            )
 
         logger.debug('Feed %s добавлен в БД', url)
         return feed
@@ -96,11 +98,14 @@ class FeedRepo:
         name = name.replace('-', '.')
         query = self.session.query(Feed)
         query = query.filter_by(is_deleted=False)
-        query = query.filter(Feed.name.contains(name)).all()
-        if not query:
+        feeds = query.filter(Feed.name.contains(name)).all()
+        if not feeds:
             raise NotFoundError('feed', name)
 
-        return [e.feed_authors for e in query][0]
+        authors = []
+        for feed in feeds:
+            authors.append(feed.feed_authors)
+        return sum(authors, [])
 
     def get_articles(self, uid) -> list[Article]:
         feed = self.get_by_id(uid)

@@ -1,8 +1,7 @@
 from datetime import datetime
+from typing import Optional
 
 from pydantic import AnyUrl, BaseModel
-
-from typing import Optional
 
 
 class Model(BaseModel):

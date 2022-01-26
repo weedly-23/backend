@@ -1,11 +1,11 @@
 from datetime import datetime
+from itertools import chain
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from weedly.db.models import Article, Feed
-
-from weedly.errors import NotFoundError, AlreadyExistsError
+from weedly.errors import AlreadyExistsError, NotFoundError
 
 
 class ArticleRepo:
@@ -14,14 +14,21 @@ class ArticleRepo:
         self.session = session
 
     def add(
-        self, title: str, url: str,
+        self,
+        title: str,
+        url: str,
         published: datetime,
-        author_id: int, feed_id: int
+        author_id: int,
+        feed_id: int,
     ) -> Article:
-
         try:
-            article = Article(title=title, url=url, published=published,
-                              feed_id=feed_id, author_id=author_id)
+            article = Article(
+                title=title,
+                url=url,
+                published=published,
+                feed_id=feed_id,
+                author_id=author_id,
+            )
             self.session.add(article)
             self.session.commit()
             return article
@@ -41,22 +48,14 @@ class ArticleRepo:
     def get_by_feed_name(self, feed_name) -> list[Article]:
         query = self.session.query(Feed)
         query = query.filter(Feed.name.contains(feed_name))
-        if not query.count():
-            raise NotFoundError('feed_name', feed_name)
-
         articles = [feed.feed_articles for feed in query]
-
-        if not articles:
-            raise NotFoundError('articles', feed_name)
-
-        return articles
+        return list(chain.from_iterable(articles))
 
     def get_all(self, limit: int = 100, offset=0) -> list[Article]:
         query = self.session.query(Article)
         query = query.filter_by(is_deleted=False)
         query = query.limit(limit).offset(offset)
-        articles = query.all()
-        return articles
+        return query.all()
 
     def update(self, uid: int, title: str, url: str, published: datetime) -> Article:
         query = self.session.query(Article)

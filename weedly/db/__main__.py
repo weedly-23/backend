@@ -1,10 +1,11 @@
 import logging
+from pathlib import Path
 
+import orjson
 from typer import Typer
 
-from weedly.db.session import create_db, db_session
 from weedly.db.models import Feed
-from weedly.db.test_rss import test_rss_sources
+from weedly.db.session import create_db, db_session
 
 app = Typer()
 logger = logging.getLogger(__name__)
@@ -18,8 +19,10 @@ def create():
 
 @app.command()
 def add_test_rss():
-    for source in test_rss_sources:
-        db_session.add(Feed(**source))
+    data = Path('data/test_rss.json').read_bytes()
+    feeds = orjson.loads(data)
+    for feed in feeds:
+        db_session.add(Feed(**feed))
         db_session.commit()
 
     logger.debug('добавили в БД тестовые rss!')

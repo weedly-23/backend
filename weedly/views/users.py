@@ -1,5 +1,7 @@
-from flask import Blueprint, jsonify, request
+import http
+import logging
 
+from flask import Blueprint, jsonify, request
 
 from weedly import schemas
 from weedly.db.session import db_session
@@ -14,59 +16,65 @@ repo = UserRepo(session=db_session)
 def get_all():
     entities = repo.get_all()
     users = [schemas.User.from_orm(entity).dict() for entity in entities]
-    return jsonify(users), 200
+    logging.debug('users----%s', users)
+    return jsonify(users), http.HTTPStatus.OK
 
 
 @routes.get('/<int:uid>')
 def get_by_id(uid: int):
     entity = repo.get_by_id(uid)
     user = schemas.User.from_orm(entity)
-    return user.dict(), 200
+    return user.dict(), http.HTTPStatus.OK
 
 
 @routes.post('/')
 def add():
     payload = request.json
     if not payload:
-        return {'error': 'payload required'}, 400
+        return {'error': 'payload required'}, http.HTTPStatus.BAD_REQUEST
 
     user = schemas.User(**payload)
     entity = repo.add(name=user.name, uid=user.uid)
     new_user = schemas.User.from_orm(entity)
-    return new_user.dict(), 200
+    return new_user.dict(), http.HTTPStatus.OK
 
 
 @routes.post('/<int:uid>/feeds/')
 def add_rss_to_user(uid: int):
-
     payload = request.json
     if not payload:
-        return {'error': 'payload required'}, 400
+        return {'error': 'payload required'}, http.HTTPStatus.BAD_REQUEST
 
     feed_id = payload['feed_id']
 
-    updated_feeds = repo.add_rss_to_user(uid=uid, feed_id=feed_id)
-    return {"updated_feeds": updated_feeds}, 200
+    entities = repo.add_rss_to_user(uid=uid, feed_id=feed_id)
+    feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
+
+    return jsonify(feeds), http.HTTPStatus.OK
 
 
 @routes.delete('/<int:uid>/feeds/<int:feed_id>')
 def delete_rss(uid, feed_id):
-    repo.delete_rss_from_subs(uid, feed_id)
-    return f'Удалили {feed_id}', 204
+    entities = repo.delete_rss_from_subs(uid, feed_id)
+    feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
+    return jsonify(feeds), http.HTTPStatus.OK
 
 
-@routes.get('/<int:uid>/feeds')
+@routes.get('/<int:uid>/feeds/')
 def get_user_feeds(uid: int):
     entities = repo.get_user_rss(uid)
+    feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
+    return jsonify(feeds), http.HTTPStatus.OK
 
-    if entities:
-        feeds = [schemas.Feed.from_orm(e).dict() for e in entities]
-        return jsonify(feeds), 200
 
-    return 'No feeds', 204
+@routes.get('/<int:uid>/articles/')
+def get_user_articles(uid: int):
+    entities = repo.get_not_notificated_articles(uid)
+    articles = [schemas.Article.from_orm(article).dict() for article in entities]
+    return jsonify(articles), http.HTTPStatus.OK
 
 
 @routes.delete('/<int:uid>')
 def delete(uid: int):
     repo.delete(uid)
-    return {}, 204
+    return {}, http.HTTPStatus.NO_CONTENT
