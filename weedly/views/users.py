@@ -1,6 +1,6 @@
-from charset_normalizer import logging
-from flask import Blueprint, jsonify, request
+import logging
 
+from flask import Blueprint, jsonify, request
 
 from weedly import schemas
 from weedly.db.session import db_session
