@@ -50,18 +50,6 @@ class ChannelRepo:
         self.session.commit()
         logger.debug('Удалили Channel %S', channel)
 
-    def delete_by_channel_id(self, channel_id: str) -> None:
-        query = self.session.query(Channel)
-        query = query.filter_by(channel_id=channel_id, is_deleted=False)
-        channel = query.first()
-
-        if not channel:
-            raise NotFoundError('channel', channel_id)
-
-        channel.is_deleted = True
-        self.session.commit()
-        logger.debug('Удалили Channel %S', channel)
-
     def get_all(self, limit: int = 100, offset=0) -> list[Channel]:
         query = self.session.query(Channel)
         query = query.filter_by(is_deleted=False)

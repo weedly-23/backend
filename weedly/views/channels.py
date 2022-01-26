@@ -55,9 +55,3 @@ def add():
 def delete(uid: int):
     repo.delete(uid)
     return '', HTTPStatus.NO_CONTENT
-
-
-@routes.delete('/channel-id/<string:channel_id>')
-def delete_by_channel_id(channel_id: str):
-    repo.delete_by_channel_id(channel_id)
-    return '', HTTPStatus.NO_CONTENT
