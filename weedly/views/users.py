@@ -13,14 +13,10 @@ repo = UserRepo(session=db_session)
 
 @routes.get('/')
 def get_all():
-    try:
-        print('--- получили запрос на юзеров ---')
-        entities = repo.get_all()
-        users = [schemas.User.from_orm(entity).dict() for entity in entities]
-        logging.debug('users----%s', users)
-        return jsonify(users), 200
-    except Exception as ex:
-        return {"error": ex}, 404
+    entities = repo.get_all()
+    users = [schemas.User.from_orm(entity).dict() for entity in entities]
+    logging.debug('users----%s', users)
+    return jsonify(users), 200
 
 
 @routes.get('/<int:uid>')
