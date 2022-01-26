@@ -38,3 +38,15 @@ class Article(Model):
 
     class Config:
         arbitrary_types_allowed = True
+
+
+class Channel(Model):
+    title: str
+    channel_id: str
+
+
+class Video(Model):
+    video_id: str
+    title: str
+    channel_id: str
+    duration: Optional[str]

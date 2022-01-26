@@ -149,3 +149,30 @@ class Article(Base):
 
     def __repr__(self) -> str:
         return f'Article: [{self.uid}] {self.title}'
+
+
+class Channel(Base):
+    __tablename__ = 'channels'
+
+    uid = Column(Integer, primary_key=True)
+    title = Column(String)
+    channel_id = Column(String, unique=True)
+    is_deleted = Column(Boolean, default=False)
+
+    def __repr__(self) -> str:
+        return f'Channel: [{self.uid}] {self.title}, {self.channel_id}'
+
+
+class Video(Base):
+    __tablename__ = 'videos'
+
+    uid = Column(Integer, primary_key=True)
+    video_id = Column(String, unique=True)
+    title = Column(String)
+    channel_id = Column(String, ForeignKey(Channel.channel_id))
+    duration = Column(String, nullable=True)
+    is_deleted = Column(Boolean, default=False)
+    channel_videos: Any = relationship('Channel', backref='channel_videos')
+
+    def __repr__(self) -> str:
+        return f'Video: [{self.uid}] {self.video_id}, {self.title}'

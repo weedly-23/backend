@@ -1,4 +1,5 @@
 import logging
+from itertools import chain
 from typing import Optional
 
 from sqlalchemy.exc import IntegrityError
@@ -94,18 +95,14 @@ class FeedRepo:
         feed = self.get_by_id(uid)
         return feed.feed_authors
 
-    def get_authors_by_name(self, name):
+    def get_authors_by_name(self, name) -> list[Author]:
         name = name.replace('-', '.')
         query = self.session.query(Feed)
         query = query.filter_by(is_deleted=False)
         feeds = query.filter(Feed.name.contains(name)).all()
-        if not feeds:
-            raise NotFoundError('feed', name)
 
-        authors = []
-        for feed in feeds:
-            authors.append(feed.feed_authors)
-        return sum(authors, [])
+        authors = [feed.feed_authors for feed in feeds]
+        return list(chain.from_iterable(authors))
 
     def get_articles(self, uid) -> list[Article]:
         feed = self.get_by_id(uid)

@@ -28,7 +28,7 @@ def get_all():
 
 
 @routes.get('/<int:uid>')
-def get_by_id(uid):
+def get_by_id(uid: int):
     feed = repo.get_by_id(uid)
     data = schemas.Feed.from_orm(feed).dict()
     return jsonify(data), HTTPStatus.OK

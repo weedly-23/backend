@@ -7,7 +7,7 @@ from werkzeug.exceptions import HTTPException
 
 from weedly.db import models, session
 from weedly.errors import AppError
-from weedly.views import articles, authors, feeds, users
+from weedly.views import articles, authors, channels, feeds, users, videos
 
 logger = logging.getLogger(__name__)
 
@@ -44,6 +44,8 @@ def create_app():
     app.register_blueprint(users.routes, url_prefix='/api/v1/users/')
     app.register_blueprint(authors.routes, url_prefix='/api/v1/authors/')
     app.register_blueprint(articles.routes, url_prefix='/api/v1/articles/')
+    app.register_blueprint(channels.routes, url_prefix='/api/v1/channels/')
+    app.register_blueprint(videos.routes, url_prefix='/api/v1/videos/')
 
     app.register_error_handler(HTTPException, handle_http_error)
     app.register_error_handler(AppError, handle_app_error)
