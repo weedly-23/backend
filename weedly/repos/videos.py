@@ -1,4 +1,5 @@
 import logging
+from typing import Optional
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -19,7 +20,7 @@ class VideoRepo:
         video_id: str,
         title: str,
         channel_id: str,
-        duration: str,
+        duration: Optional[str],
     ) -> Video:
         try:
             video = Video(video_id=video_id, title=title, channel_id=channel_id, duration=duration)
