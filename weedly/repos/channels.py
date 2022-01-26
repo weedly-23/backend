@@ -41,12 +41,10 @@ class ChannelRepo:
 
     def delete(self, uid: int) -> None:
         query = self.session.query(Channel)
-        query = query.filter_by(uid=uid)
+        query = query.filter_by(uid=uid, is_deleted=False)
         channel = query.first()
         if not channel:
             raise NotFoundError('channel', uid)
-        if channel.is_deleted:
-            raise AlreadyExistsError('channel', str(uid))
 
         channel.is_deleted = True
         self.session.commit()
@@ -54,12 +52,12 @@ class ChannelRepo:
 
     def delete_by_channel_id(self, channel_id: str) -> None:
         query = self.session.query(Channel)
-        query = query.filter_by(channel_id=channel_id)
+        query = query.filter_by(channel_id=channel_id, is_deleted=False)
         channel = query.first()
+
         if not channel:
             raise NotFoundError('channel', channel_id)
-        if channel.is_deleted:
-            raise AlreadyExistsError('channel', str(channel_id))
+
         channel.is_deleted = True
         self.session.commit()
         logger.debug('Удалили Channel %S', channel)
