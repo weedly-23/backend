@@ -38,3 +38,9 @@ class Article(Model):
 
     class Config:
         arbitrary_types_allowed = True
+
+class Channel(Model):
+    ...
+
+class Video(Model):
+    ...
