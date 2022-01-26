@@ -4,7 +4,6 @@ from flask import Blueprint, request
 
 from weedly import schemas
 from weedly.db.session import db_session
-from weedly.errors import NotFoundError
 from weedly.jsonify import jsonify
 from weedly.repos.channels import ChannelRepo
 
