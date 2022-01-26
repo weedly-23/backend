@@ -1,4 +1,3 @@
-from datetime import timedelta
 from typing import Any
 
 from flask_sqlalchemy import SQLAlchemy
@@ -168,10 +167,16 @@ class Video(Base):
     __tablename__ = 'videos'
 
     uid = Column(Integer, primary_key=True)
-    video_id = Column(String)
+    video_id = Column(String, unique=True)
     title = Column(String)
+    channel_id = Column(String, ForeignKey(Channel.channel_id))
     duration = Column(Integer, nullable=True)
     is_deleted = Column(Boolean, default=False)
+    channel: Any = relationship(
+        'Channel',
+        foreign_keys=[channel_id],
+        backref='channel_videos',
+    )
 
     def __repr__(self) -> str:
         return f'Video: [{self.uid}] {self.video_id}, {self.title}'
