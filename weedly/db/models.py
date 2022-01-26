@@ -170,13 +170,9 @@ class Video(Base):
     video_id = Column(String, unique=True)
     title = Column(String)
     channel_id = Column(String, ForeignKey(Channel.channel_id))
-    duration = Column(Integer, nullable=True)
+    duration = Column(String, nullable=True)
     is_deleted = Column(Boolean, default=False)
-    channel: Any = relationship(
-        'Channel',
-        foreign_keys=[channel_id],
-        backref='channel_videos',
-    )
+    channel_videos: Any = relationship('Channel', backref='channel_videos')
 
     def __repr__(self) -> str:
         return f'Video: [{self.uid}] {self.video_id}, {self.title}'

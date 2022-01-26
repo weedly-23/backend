@@ -1,10 +1,9 @@
 import logging
-from typing import Optional
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from weedly.db.models import Video
+from weedly.db.models import Channel, Video
 from weedly.errors import AlreadyExistsError, NotFoundError
 
 logger = logging.getLogger(__name__)
@@ -20,7 +19,7 @@ class VideoRepo:
         video_id: str,
         title: str,
         channel_id: str,
-        duration: int,
+        duration: str,
     ) -> Video:
         try:
             video = Video(video_id=video_id, title=title, channel_id=channel_id, duration=duration)
@@ -51,14 +50,13 @@ class VideoRepo:
         return video
 
     def get_by_channel_id(self, channel_id) -> list[Video]:
-        query = self.session.query(Video)
+        query = self.session.query(Channel)
         query = query.filter_by(channel_id=channel_id)
-        query = query.filter_by(is_deleted=False)
 
         if not query.count():
             raise NotFoundError('channel_id', channel_id)
 
-        videos = [video.channel_videos for video in query]
+        videos = list(query[0].channel_videos)
 
         if not videos:
             raise NotFoundError('videos', channel_id)

@@ -49,4 +49,4 @@ class Video(Model):
     video_id: str
     title: str
     channel_id: str
-    duration: Optional[int]
+    duration: Optional[str]
