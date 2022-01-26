@@ -1,9 +1,10 @@
 from http import HTTPStatus
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 
 from weedly import schemas
 from weedly.db.session import db_session
+from weedly.jsonify import jsonify
 from weedly.repos.feeds import FeedRepo
 
 routes = Blueprint('feeds', __name__)
@@ -19,46 +20,47 @@ def get_all():
     if rss_only:
         entities = repo.get_all_rss()
         feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
-        return jsonify(feeds), 200
+        return jsonify(feeds), HTTPStatus.OK
 
     entities = repo.get_all()
     feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
-    return jsonify(feeds), 200
+    return jsonify(feeds), HTTPStatus.OK
 
 
 @routes.get('/<int:uid>')
 def get_by_id(uid):
     feed = repo.get_by_id(uid)
-    data = schemas.Feed.from_orm(feed).json()
-    return data, 200
+    data = schemas.Feed.from_orm(feed).dict()
+    return jsonify(data), HTTPStatus.OK
 
 
 @routes.get('/source-name/<string:name>')
 def get_by_source_name(name):
     entities = repo.get_authors_by_name(name)
     authors = [schemas.Author.from_orm(entity).dict() for entity in entities]
-    return jsonify(authors)
+    return jsonify(authors), HTTPStatus.OK
 
 
 @routes.get('/<int:uid>/authors/')
 def get_authors(uid: int):
     entities = repo.get_authors_by_id(uid)
     authors = [schemas.Author.from_orm(entity).dict() for entity in entities]
-    return jsonify(authors), 200
+    return jsonify(authors), HTTPStatus.OK
 
 
 @routes.get('/<int:uid>/articles/')
 def get_articles(uid):
     entities = repo.get_articles(uid)
     articles = [schemas.Article.from_orm(article).dict() for article in entities]
-    return jsonify(articles), 200
+    return jsonify(articles), HTTPStatus.OK
 
 
 @routes.post('/')
 def add():
     payload = request.json
     if not payload:
-        return {'error': 'payload required'}, 400
+        return {'error': 'payload required'}, HTTPStatus.BAD_REQUEST
+
     payload['uid'] = 0
     feed = schemas.Feed(**payload)
     entity = repo.add(
@@ -75,28 +77,29 @@ def add():
 def update():
     payload = request.json
     if not payload:
-        return {'error': 'payload required'}, 400
+        return {'error': 'payload required'}, HTTPStatus.BAD_REQUEST
+
     feed = schemas.Feed(**payload).dict()
     entity = repo.update(**feed)
     updated_feed = schemas.Feed.from_orm(entity).dict()
 
-    return jsonify(updated_feed), 200
+    return jsonify(updated_feed), HTTPStatus.OK
 
 
 @routes.post('/get-by-url/')
 def get_by_url():
     payload = request.json
     if not payload:
-        return {'error': 'payload required'}, 400
+        return {'error': 'payload required'}, HTTPStatus.BAD_REQUEST
 
     url = payload['url']
     entity = repo.get_by_url(url)
     feed = schemas.Feed.from_orm(entity).dict()
 
-    return jsonify(feed), 200
+    return jsonify(feed), HTTPStatus.OK
 
 
 @routes.delete('/<int:uid>')
 def delete(uid: int):
     repo.delete(uid)
-    return '', 204
+    return '', HTTPStatus.NO_CONTENT
