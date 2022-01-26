@@ -1,3 +1,4 @@
+import http
 import logging
 
 from flask import Flask
@@ -9,6 +10,12 @@ from weedly.errors import AppError
 from weedly.views import articles, authors, feeds, users
 
 logger = logging.getLogger(__name__)
+
+
+def handle_any_error(error: Exception):
+    logger.exception('internal server error occurred')
+    return {'error': str(error)}, http.HTTPStatus.INTERNAL_SERVER_ERROR
+
 
 def handle_app_error(error: AppError):
     logger.warning(error.reason)
@@ -41,6 +48,7 @@ def create_app():
     app.register_error_handler(HTTPException, handle_http_error)
     app.register_error_handler(AppError, handle_app_error)
     app.register_error_handler(ValidationError, handle_validation_error)
+    app.register_error_handler(Exception, handle_any_error)
 
     app.teardown_appcontext(shutdown_session)
 
