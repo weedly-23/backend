@@ -1,9 +1,10 @@
 from http import HTTPStatus
 
-from flask import Blueprint, abort, jsonify, request
+from flask import Blueprint, abort, request
 
 from weedly import schemas
 from weedly.db.session import db_session
+from weedly.jsonify import jsonify
 from weedly.repos.authors import AuthorRepo
 
 routes = Blueprint('authors', __name__)
@@ -22,21 +23,21 @@ def add():
     author = schemas.Author(**payload)
     entity = repo.add(name=author.name, feed_id=author.feed_id)
     new_author = schemas.Author.from_orm(entity)
-    return new_author.dict(), HTTPStatus.CREATED
+    return jsonify(new_author.dict()), HTTPStatus.CREATED
 
 
 @routes.get('/<int:uid>')
 def get_by_id(uid):
     entity = repo.get_by_id(uid)
     author = schemas.Author.from_orm(entity)
-    return author.dict(), 200
+    return jsonify(author.dict()), 200
 
 
 @routes.get('/<int:uid>/feed')
 def get_author_feed(uid):
     entity = repo.get_author_feed(uid)
     feed = schemas.Feed.from_orm(entity)
-    return feed.dict(), 200
+    return jsonify(feed.dict()), 200
 
 
 @routes.get('<int:uid>/articles/')
