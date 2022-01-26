@@ -23,8 +23,10 @@ class FeedRepo:
             self.session.commit()
 
         except IntegrityError as err:
-            raise AlreadyExistsError(entity='feeds',
-                                     constraint=str(err))
+            raise AlreadyExistsError(
+                entity='feeds',
+                constraint=str(err),
+            )
 
         logger.debug('Feed %s добавлен в БД', url)
         return feed

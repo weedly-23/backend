@@ -3,7 +3,7 @@ import logging
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from weedly.db.models import Author, Article, Feed
+from weedly.db.models import Article, Author, Feed
 from weedly.errors import AlreadyExistsError, NotFoundError
 
 logger = logging.getLogger(__name__)
