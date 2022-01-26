@@ -52,24 +52,19 @@ class VideoRepo:
 
     def get_by_channel_id(self, channel_id) -> list[Video]:
         query = self.session.query(Channel)
-        query = query.filter_by(channel_id=channel_id)
+        channel = query.filter_by(channel_id=channel_id).first()
 
-        if not query.count():
+        if not channel:
             raise NotFoundError('channel_id', channel_id)
 
-        videos = list(query[0].channel_videos)
-
-        if not videos:
-            raise NotFoundError('videos', channel_id)
-
-        return videos
+        return channel.channel_videos
 
     def get_all(self, limit: int = 100, offset=0) -> list[Video]:
         query = self.session.query(Video)
         query = query.filter_by(is_deleted=False)
         query = query.limit(limit).offset(offset)
 
-        return list(query.all())
+        return query.all()
 
     def delete(self, uid: int) -> None:
         query = self.session.query(Video)
