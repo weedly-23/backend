@@ -1,9 +1,10 @@
 from http import HTTPStatus
 
-from flask import Blueprint, abort, jsonify, request
+from flask import Blueprint, abort, request
 
 from weedly import schemas
 from weedly.db.session import db_session
+from weedly.jsonify import jsonify
 from weedly.repos.videos import VideoRepo
 
 routes = Blueprint('videos', __name__)
@@ -13,34 +14,29 @@ repo = VideoRepo(db_session)
 
 @routes.get('/')
 def get_all():
+    args = request.args
+    video_id = args.get('video_id')
+    if video_id:
+        entity = repo.get_by_video_id(video_id)
+        video = schemas.Video.from_orm(entity).dict()
+        return jsonify([video]), HTTPStatus.OK
+
+    channel_id = args.get('channel_id')
+    if channel_id:
+        entities = repo.get_by_channel_id(channel_id)
+        videos = [schemas.Video.from_orm(entity).dict() for entity in entities]
+        return jsonify(videos), HTTPStatus.OK
+
     entities = repo.get_all()
     videos = [schemas.Video.from_orm(entity).dict() for entity in entities]
-
-    return jsonify(videos)
+    return jsonify(videos), HTTPStatus.OK
 
 
 @routes.get('/<int:uid>')
 def get_by_uid(uid):
     video = repo.get_by_id(uid)
-    data = schemas.Video.from_orm(video).json()
-
-    return data, 200
-
-
-@routes.get('/video-id/<string:video_id>')
-def get_by_video_id(video_id):
-    video = repo.get_by_video_id(video_id)
-    data = schemas.Video.from_orm(video).json()
-
-    return data, 200
-
-
-@routes.get('/channel-id/<string:channel_id>')
-def get_videos_by_channel_id(channel_id):
-    entities = repo.get_by_channel_id(channel_id)
-    data = [schemas.Video.from_orm(entity).dict() for entity in entities]
-
-    return jsonify(data), 200
+    data = schemas.Video.from_orm(video).dict()
+    return jsonify(data), HTTPStatus.OK
 
 
 @routes.post('/')
@@ -56,11 +52,11 @@ def add():
         channel_id=video.channel_id,
         duration=video.duration,
     )
-    new_video = schemas.Video.from_orm(entity)
-    return new_video.json(), HTTPStatus.CREATED
+    new_video = schemas.Video.from_orm(entity).dict()
+    return jsonify(new_video), HTTPStatus.CREATED
 
 
 @routes.delete('/<int:uid>')
 def delete(uid: int):
     repo.delete(uid)
-    return '', 204
+    return {}, HTTPStatus.NOT_FOUND

@@ -17,8 +17,9 @@ def get_all():
     args = request.args
     channel_id = args.get('channel_id')
     if channel_id:
-        channel = repo.get_by_channel_id(channel_id)
-        return jsonify(channel.dict()), HTTPStatus.OK
+        entity = repo.get_by_channel_id(channel_id)
+        channel = schemas.Channel.from_orm(entity).dict()
+        return jsonify([channel]), HTTPStatus.OK
 
     entities = repo.get_all()
     channels = [schemas.Channel.from_orm(entity).dict() for entity in entities]
