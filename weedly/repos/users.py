@@ -1,11 +1,9 @@
-from charset_normalizer import logging
-from weedly.db.session import db_session
 from typing import Optional
 
 from sqlalchemy.orm import Session
 
-from weedly.db.models import Article, Feed, User, Channel
-from weedly.errors import NotFoundError
+from weedly.db.models import Article, Channel, Feed, User
+from weedly.db.session import db_session
 from weedly.services.youtube import YoutubService
 
 
@@ -148,7 +146,7 @@ class UserRepo:
             raise NotFoundError('no notifications for user', user_id)
         return feeds
 
-    def turn_on_notifications(self, user_id, feed_id):
+    def turn_on_notifications(self, user_id, feed_id) -> bool:
         query = self.session.query(User)
         query = query.filter_by(uid=user_id)
         user = query.first()
@@ -166,7 +164,7 @@ class UserRepo:
         logging.debug('добавили юзеру %s нотификейшн для %s', user_id, feed_id)
         return True
 
-    def turn_off_notifications(self, user_id, feed_id):
+    def turn_off_notifications(self, user_id, feed_id) :
         query = self.session.query(User)
         query = query.filter_by(uid=user_id)
         user = query.first()
