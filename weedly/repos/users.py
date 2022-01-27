@@ -1,9 +1,12 @@
+from charset_normalizer import logging
+from weedly.db.session import db_session
 from typing import Optional
 
 from sqlalchemy.orm import Session
 
-from weedly.db.models import Article, Feed, User
+from weedly.db.models import Article, Feed, User, Channel
 from weedly.errors import NotFoundError
+from weedly.services.youtube import YoutubService
 
 
 class UserRepo:
@@ -96,15 +99,90 @@ class UserRepo:
 
         all_not_notificated_articles = []
 
-        for feed in user.feeds:
-            for article in feed.feed_articles:
-                notificated_users = [user.uid for user in article.notificated_users]
-                if user_id not in notificated_users:
-                    all_not_notificated_articles.append(article)
-                    article.notificated_users.append(user)
-                    self.session.commit()
+        # TODO: зарефачить этот водопад :)
+
+        if user.feeds_with_notifications:
+            for feed in user.feeds_with_notifications:
+                for article in feed.feed_articles:
+                    notificated_users = [user.uid for user in article.notificated_users]
+                    if user_id not in notificated_users:
+                        all_not_notificated_articles.append(article)
+                        article.notificated_users.append(user)
+                        self.session.commit()
 
         return all_not_notificated_articles
+
+    def add_yt_channel_to_user(self, user_id, yt_link) -> Channel:
+        query = self.session.query(User)
+        query = query.filter_by(uid=user_id)
+        user = query.first()
+        if not user:
+            raise NotFoundError('user', user_id)
+        yt = YoutubService()
+        yt_channel_id = yt.extract_channel_id(yt_link)
+
+        query = self.session.query(Channel)
+        query = query.filter_by(channel_id=yt_channel_id)
+        channel = query.first()
+
+        if not channel:
+            channel = Channel(title='Хз откуда брать название канала', channel_id=yt_channel_id)
+            user.yt_channels.append(channel)
+
+            self.session.add(channel)
+            self.session.commit()
+            return channel
+
+        user.yt_channels.append(channel)
+        self.session.commit()
+        return channel
+
+    def get_user_notifications(self, user_id) -> list[Feed]:
+        query = self.session.query(User)
+        query = query.filter_by(uid=user_id)
+        user = query.first()
+        if not user:
+            raise NotFoundError('user', user_id)
+        feeds = user.feeds_with_notifications
+        if not feeds:
+            raise NotFoundError('no notifications for user', user_id)
+        return feeds
+
+    def turn_on_notifications(self, user_id, feed_id):
+        query = self.session.query(User)
+        query = query.filter_by(uid=user_id)
+        user = query.first()
+        if not user:
+            raise NotFoundError('user', user_id)
+
+        query = self.session.query(Feed)
+        query = query.filter_by(uid=feed_id)
+        feed = query.first()
+        if not feed:
+            raise NotFoundError('feed', feed_id)
+
+        user.feeds_with_notifications.append(feed)
+        self.session.commit()
+        logging.debug('добавили юзеру %s нотификейшн для %s', user_id, feed_id)
+        return True
+
+    def turn_off_notifications(self, user_id, feed_id):
+        query = self.session.query(User)
+        query = query.filter_by(uid=user_id)
+        user = query.first()
+        if not user:
+            raise NotFoundError('user', user_id)
+
+        query = self.session.query(Feed)
+        query = query.filter_by(uid=feed_id)
+        feed = query.first()
+        if not feed:
+            raise NotFoundError('feed', feed_id)
+
+        user.feeds_with_notifications = [
+            user_feed for user_feed in user.feeds_with_notifications if user_feed != feed]
+        self.session.commit()
+        return True
 
     def delete(self, uid: int) -> None:
         query = self.session.query(User)

@@ -53,6 +53,28 @@ def add_rss_to_user(uid: int):
     return jsonify(feeds), http.HTTPStatus.OK
 
 
+@routes.get('/<int:uid>/notifications')
+def get_notificated_feeds(uid):
+    entities = repo.get_user_notifications(uid)
+    feeds = [schemas.Feed.from_orm(entity).dict() for entity in entities]
+
+    return jsonify(feeds), http.HTTPStatus.OK
+
+
+@routes.put('/<int:uid>/feeds/<int:feed_id>/notification-on')
+def turn_on_notifications(uid, feed_id):
+    update_result = repo.turn_on_notifications(uid, feed_id)
+    if update_result:
+        return {}, http.HTTPStatus.OK
+
+
+@routes.put('/<int:uid>/feeds/<int:feed_id>/notification-off')
+def turn_off_notifications(uid, feed_id):
+    update_result = repo.turn_off_notifications(uid, feed_id)
+    if update_result:
+        return {}, http.HTTPStatus.OK
+
+
 @routes.delete('/<int:uid>/feeds/<int:feed_id>')
 def delete_rss(uid, feed_id):
     entities = repo.delete_rss_from_subs(uid, feed_id)
@@ -68,10 +90,22 @@ def get_user_feeds(uid: int):
 
 
 @routes.get('/<int:uid>/articles/')
-def get_user_articles(uid: int):
+def get_not_notificated_articles(uid: int):
     entities = repo.get_not_notificated_articles(uid)
     articles = [schemas.Article.from_orm(article).dict() for article in entities]
     return jsonify(articles), http.HTTPStatus.OK
+
+
+@routes.post('/<int:uid>/yt-channels')
+def add_yt_channels_to_user(uid):
+    payload = request.json
+    if not payload:
+        return {'error': 'payload required'}, http.HTTPStatus.BAD_REQUEST
+
+    yt_link = payload['yt_link']
+    entity = repo.add_yt_channel_to_user(uid, yt_link)
+    new_user_channel = schemas.Channel.from_orm(entity).dict()
+    return new_user_channel, http.HTTPStatus.OK
 
 
 @routes.delete('/<int:uid>')

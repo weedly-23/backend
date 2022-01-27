@@ -25,11 +25,27 @@ users_n_feeds = Table(
 )
 
 
-users_n_articles_notifications = Table(
-    'users_n_articles_notifications',
+users_notificated_articles = Table(
+    'users_notificated_articles',
     Base.metadata,
     Column('user_id', ForeignKey('users.uid')),
     Column('article_id', ForeignKey('articles.uid')),
+)
+
+
+feeds_to_notificate = Table(
+    'feeds_to_notificate',
+    Base.metadata,
+    Column('user_id', ForeignKey('users.uid')),
+    Column('feed_id', ForeignKey('feeds.uid')),
+)
+
+
+users_n_ytchannels = Table(
+    'users_n_ytchannels',
+    Base.metadata,
+    Column('user_id', ForeignKey('users.uid')),
+    Column('ytchannel_id', ForeignKey('channels.uid')),
 )
 
 
@@ -85,6 +101,18 @@ class User(Base):
         backref='feed_subs',
     )
 
+    feeds_with_notifications: Any = relationship(
+        'Feed',
+        secondary='feeds_to_notificate',
+        backref='feed_subs_notifications',
+    )
+
+    yt_channels: Any = relationship(
+        'Channel',
+        secondary='users_n_ytchannels',
+        backref='channel_subs',
+    )
+
     is_deleted = Column(Boolean, default=False)
 
     def __repr__(self) -> str:
@@ -137,7 +165,7 @@ class Article(Base):
 
     notificated_users: Any = relationship(
         'User',
-        secondary='users_n_articles_notifications',
+        secondary='users_notificated_articles',
         backref='receivied_articles',
     )
 

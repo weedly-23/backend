@@ -7,7 +7,8 @@
       "request": "launch",
       "module": "weedly",
       "console": "internalConsole",
-      "justMyCode": false,
+      "justMyCode": true,
+      "python": "${workspaceRoot}/.venv/Scripts/python.exe"
     },
     {
       "name": "db.create",
@@ -15,10 +16,18 @@
       "request": "launch",
       "module": "weedly.db",
       "console": "internalConsole",
+      "python": "${workspaceRoot}/.venv/Scripts/python.exe",
       "justMyCode": false,
       "args": [
         "create"
       ]
+    },
+    {
+      "name": "test",
+      "type": "python",
+      "request": "launch",
+      "module": "weedly.repos.users",
+      "console": "internalConsole",
+      "justMyCode": true,
+      "python": "${workspaceRoot}/.venv/Scripts/python.exe"
     }
-  ]
-}
