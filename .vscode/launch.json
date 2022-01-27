@@ -7,7 +7,7 @@
       "request": "launch",
       "module": "weedly",
       "console": "internalConsole",
-      "justMyCode": false,
+      "justMyCode": true,
     },
     {
       "name": "db.create",
@@ -19,6 +19,14 @@
       "args": [
         "create"
       ]
+    },
+    {
+      "name": "test",
+      "type": "python",
+      "request": "launch",
+      "module": "weedly.repos.users",
+      "console": "internalConsole",
+      "justMyCode": true,
     }
   ]
 }

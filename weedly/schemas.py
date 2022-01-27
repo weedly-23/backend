@@ -1,7 +1,7 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Any
 
-from pydantic import AnyUrl, BaseModel
+from pydantic import AnyUrl, BaseModel, validator
 
 
 class Model(BaseModel):
@@ -34,7 +34,12 @@ class Article(Model):
     published: datetime
     feed_id: int
     author_id: int
+    feed: Optional[Any]
     description: Optional[str]
+
+    @validator('feed')
+    def get_feed_name(cls, value):
+        return value.name
 
     class Config:
         arbitrary_types_allowed = True
