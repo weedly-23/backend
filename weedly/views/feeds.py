@@ -51,9 +51,8 @@ def get_authors(uid: int):
 @routes.get('/<int:uid>/articles/')
 def get_articles(uid):
     entities = repo.get_articles(uid)
-
-    # articles = [schemas.Article.from_orm(article).dict() for article in entities]
-    # return jsonify(articles), HTTPStatus.OK
+    articles = [schemas.Article.from_orm(article).dict() for article in entities]
+    return jsonify(articles), HTTPStatus.OK
 
 
 @routes.post('/')
