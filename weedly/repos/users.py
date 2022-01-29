@@ -87,9 +87,9 @@ class UserRepo:
         if not user:
             raise NotFoundError('user', uid)
 
-        feeds = [feed for feed in user.feeds if not feed.is_deleted]
+#        feeds = [feed for feed in user.feeds if not feed.is_deleted]
 
-        return feeds
+        return user.feeds
 
     def get_not_notificated_articles(self, user_id) -> list[Article]:
         query = self.session.query(User)
