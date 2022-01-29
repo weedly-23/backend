@@ -62,7 +62,14 @@ if __name__ == '__main__':
         'https://www.youtube.com/c/ntvru',
         'https://www.youtube.com/c/tvrain',
         'https://www.youtube.com/watch?v=PlBrgFe5Fhg&list=PLUh4W61bt_K78f3sc1iM3NMN0_RM0f9Cv',
+        'https://www.youtube.com/watch?v=S0AwwvtwDyk&t=20s'
     ]
     for text in inputs:
-        channel_id = yt.extract_channel_id(text)
-        logging.info(channel_id)
+        try:
+            channel_id = yt.extract_channel_id(text)
+            print(f'{text}. \n ID :----- {channel_id}')
+
+        except Exception as ex:
+            print(ex)
+            print(text)
+            #logging.info(channel_id)

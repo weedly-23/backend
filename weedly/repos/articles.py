@@ -1,6 +1,3 @@
-from weedly.db.session import db_session
-from weedly import schemas
-
 from datetime import datetime
 from itertools import chain
 

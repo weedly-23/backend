@@ -224,5 +224,5 @@
         "#pycharm": true,
         ".idea": true
     },
-    "python.linting.enabled": true
+    "python.linting.enabled": false
 }

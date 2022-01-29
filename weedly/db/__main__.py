@@ -5,11 +5,16 @@ import orjson
 from typer import Typer
 
 from weedly.db.models import Feed
-from weedly.db.session import create_db, db_session
+from weedly.db.session import create_db, db_session, reset_db
 
 app = Typer()
 logger = logging.getLogger(__name__)
 
+
+@app.command()
+def reset():
+    reset_db()
+    logger.debug('Удалили базу!')
 
 @app.command()
 def create():
