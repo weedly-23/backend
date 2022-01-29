@@ -42,15 +42,22 @@ def parse_rss(url):
 
 
 def get_name_from_url(url):
-    '''получает feed_name  из урла по принципу:
-        (https://meduza.io/feature/2022/01/03/neizvestnyy-dvazhdy -> meduza.io)
-    '''
+    name = re.findall(pattern='https://.*/', string=url)
+    name = re.sub('https://', '', name[0])
+    name = re.sub('www.', '', name)
+    name = re.findall(pattern='.*/', string=name)
+    name = name[0].strip('/')
+    name = name.split('/')[0]
+    return name
+    # '''получает feed_name  из урла по принципу:
+    #     (https://meduza.io/feature/2022/01/03/neizvestnyy-dvazhdy -> meduza.io)
+    # '''
 
-    if 'www' in url:
-        name =  re.findall(pattern='\.[a-z]*.[a-z]*', string= url)
-        return name[0].strip('.')
-    name = re.findall(pattern='[a-z]*\.[a-z]*', string= url)
-    return name[0].strip('.')
+    # if 'www' in url:
+    #     name =  re.findall(pattern='\.[a-z]*.[a-z]*', string= url)
+    #     return name[0].strip('.')
+    # name = re.findall(pattern='[a-z]*\.[a-z]*', string= url)
+    # return name[0].strip('.')
 
 
 def check_if_valid_rss(url):

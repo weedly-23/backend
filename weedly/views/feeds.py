@@ -6,6 +6,7 @@ from weedly import schemas
 from weedly.db.session import db_session
 from weedly.jsonify import jsonify
 from weedly.repos.feeds import FeedRepo
+from weedly.errors import AlreadyExistsError, NotFoundError
 
 routes = Blueprint('feeds', __name__)
 
@@ -58,18 +59,29 @@ def get_articles(uid):
 @routes.post('/')
 def add():
     payload = request.json
+    print('payload---', payload)
     if not payload:
         return {'error': 'payload required'}, HTTPStatus.BAD_REQUEST
 
     payload['uid'] = 0
     feed = schemas.Feed(**payload)
-    entity = repo.add(
-        name=feed.name,
-        url=feed.url,
-        is_rss=feed.is_rss,
-        category=feed.category,
-    )
+    try:
+        entity = repo.add(
+            name=feed.name,
+            url=feed.url,
+            is_rss=feed.is_rss,
+            category=feed.category,
+        )
+
+    except AlreadyExistsError:
+        print('такой фид уже есть, отправляем 200')
+        return 'Такой фид уже есть', 200
+
+    if not entity:
+        return {}, HTTPStatus.BAD_REQUEST
+
     new_feed = schemas.Feed.from_orm(entity)
+    print('не поймали м')
     return new_feed.dict(), HTTPStatus.CREATED
 
 
@@ -93,6 +105,7 @@ def get_by_url():
         return {'error': 'payload required'}, HTTPStatus.BAD_REQUEST
 
     url = payload['url']
+    print('payload в гет бай урл---', payload)
     entity = repo.get_by_url(url)
     feed = schemas.Feed.from_orm(entity).dict()
 

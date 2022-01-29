@@ -1,10 +1,12 @@
 from typing import Optional
-
+import logging
 from sqlalchemy.orm import Session
 
 from weedly.db.models import Article, Channel, Feed, User
 from weedly.db.session import db_session
 from weedly.services.youtube import YoutubService
+from weedly.errors import AlreadyExistsError, NotFoundError
+
 
 
 class UserRepo:
@@ -85,7 +87,9 @@ class UserRepo:
         if not user:
             raise NotFoundError('user', uid)
 
-        return user.feeds
+        feeds = [feed for feed in user.feeds if not feed.is_deleted]
+
+        return feeds
 
     def get_not_notificated_articles(self, user_id) -> list[Article]:
         query = self.session.query(User)
@@ -98,7 +102,7 @@ class UserRepo:
         all_not_notificated_articles = []
 
         # TODO: зарефачить этот водопад :)
-
+        # if not
         if user.feeds_with_notifications:
             for feed in user.feeds_with_notifications:
                 for article in feed.feed_articles:

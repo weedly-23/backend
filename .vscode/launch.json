@@ -21,6 +21,28 @@
       ]
     },
     {
+      "name": "db.add rss",
+      "type": "python",
+      "request": "launch",
+      "module": "weedly.db",
+      "console": "internalConsole",
+      "justMyCode": false,
+      "args": [
+        "add-test-rss"
+      ]
+    },
+    {
+      "name": "db.reset",
+      "type": "python",
+      "request": "launch",
+      "module": "weedly.db",
+      "console": "internalConsole",
+      "justMyCode": false,
+      "args": [
+        "reset"
+      ]
+    },
+    {
       "name": "test",
       "type": "python",
       "request": "launch",
